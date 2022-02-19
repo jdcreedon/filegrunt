@@ -15,6 +15,7 @@
 #include <string>
 #include <list>
 #include <opencv2/opencv.hpp>
+#include <unordered_map>
 
 extern "C"{
 #include <sqlite3.h>
@@ -23,6 +24,7 @@ extern "C"{
 using std::string;
 using std::filesystem::recursive_directory_iterator;
 using std::list;
+using std::unordered_map;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -42,6 +44,8 @@ struct duplicate_data{
     string size;
     string duplicate_path;
 };
+
+
 
 class MainWindow : public QMainWindow
 {
@@ -69,6 +73,7 @@ private:
     std::list<duplicate_data> duplicate_list;
     std::list<duplicate_data> * dup_list = &duplicate_list;
     std::list<duplicate_data> duplicate_images;
+    std::unordered_map<std::string, std::string> allowed_extensions = {};
 
 private slots:
     void selectSource();

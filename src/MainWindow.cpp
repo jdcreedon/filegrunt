@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     createActions();
 
-
     // Save the connection result
 
     auto rc = sqlite3_open("../data/offline.db", &db);
@@ -38,7 +37,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     //const char * sql= "CREATE TABLE file_index(directory text, name text, size real, type text";
     //sql = "CREATE TABLE file_index(directory text, name text, size real, type text);";
-    sql = "CREATE TABLE source_index(directory text);";
+    sql = "DELETE FROM source_index;CREATE TABLE source_index(directory text);";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -49,7 +48,7 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Table created successfully";
     }
 
-    sql = "CREATE TABLE file_index(path text, name text, size real, type text, duplicate integer);";
+    sql = "DELETE FROM file_index;CREATE TABLE file_index(path text, name text, size real, type text, duplicate integer);";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -60,7 +59,7 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Table created successfully";
     }
 
-    sql = "CREATE TABLE duplicate_file_list(path text, duplicate_path text);";
+    sql = "DELETE FROM duplicate_file_list;CREATE TABLE duplicate_file_list(path text, duplicate_path text);";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -93,7 +92,7 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Index created created successfully";
     }
 
-    sql = "INSERT INTO image_file_types (extension) VALUES ('.bmp'),('.dib'),('.jpeg'),('.jpg'),('.jp2'),('.png'),('.pbm'),('.pgm'),('.ppm'),('.sr'),('.ras'),('.tiff'),('.tif'),('.BMP'),('.DIB'),('.JPEG'),('.JPG'),('.JP2'),('.PNG'),('.PBM'),('.PGM'),('.PPM'),('.SR'),('.RAS'),('.TIFF'),('.TIF');";
+    sql = "INSERT INTO image_file_types (extension) VALUES ('.bmp'),('.dib'),('.jpeg'),('.jpg'),('.jp2'),('.png'),('.pbm'),('.pgm'),('.ppm'),('.sr'),('.ras'),('.tiff'),('.tif'),('.heic'),('.BMP'),('.DIB'),('.JPEG'),('.JPG'),('.JP2'),('.PNG'),('.PBM'),('.PGM'),('.PPM'),('.SR'),('.RAS'),('.TIFF'),('.TIF'),('.HEIC');";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -133,7 +132,6 @@ void MainWindow::createActions()
     connect(ui->actionSelect_Source, &QAction::triggered, this, &MainWindow::selectSource);
     connect(ui->actionFind_Duplicates, &QAction::triggered, this, &MainWindow::processSource);
     connect(ui->actionCompare_Images, &QAction::triggered, this, &MainWindow::compareImages);
-
 }
 
 void MainWindow::selectSource() {
@@ -161,8 +159,6 @@ void MainWindow::selectSource() {
     ui->listView->setModel(model);
 
     // Add tp database table
-
-    //std::string sql = "UPDATE company SET name = ? WHERE id = 1";
 
     std::string sql = "INSERT INTO source_index (directory) VALUES(?)";
 
@@ -200,7 +196,7 @@ int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **az
 
     //for(i = 0; i<argc; i++) {
         for (const auto & file : recursive_directory_iterator(argv[i])) {
-            //qDebug() << file.path();
+            qDebug() << file.path();
             if (!file.is_directory()){
 
                 sql = "INSERT INTO file_index (path,name,size,type) VALUES ";
@@ -280,13 +276,13 @@ int MainWindow::getDuplicateFileNamesCallback(void *NotUsed, int argc, char **ar
 void MainWindow::processSource() {
 
     char *zErrMsg = 0;
-    char *sql = "";
-
+    ///char *sql = "";
+    std::string image_types,sql;
 
     //1. Get files in source directories and add them to the file index table
     sql = "SELECT * from source_index";
 
-    auto rc = sqlite3_exec(db, sql, getFilesCallback, MainWindow::db, &zErrMsg);
+    auto rc = sqlite3_exec(db, sql.c_str(), getFilesCallback, MainWindow::db, &zErrMsg);
 
     if( rc != SQLITE_OK ){
         qDebug() << zErrMsg;
@@ -295,11 +291,28 @@ void MainWindow::processSource() {
         qDebug() << "File List returned successfully" << rc;
     }
 
-    //2. Check for duplicate names and sizes in the name column and update file index table and mark the duplicates
+    //2. Remove the files that are not in the file extension types we are comparing
+
+    image_types = "SELECT extension from image_file_types";
+
+    // sql = "SELECT path, name, size from file_index WHERE duplicate = 1 AND type IN (" + image_types + ") GROUP BY name, size ORDER BY name";
+
+    sql = "DELETE from file_index WHERE type NOT IN (" + image_types + ")";
+
+    auto rc_duplicates = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+
+    if( rc_duplicates != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        qDebug() << "Deleted unneeded files" << rc_duplicates;
+    }
+
+    //3. Check for duplicate names and sizes in the name column and update file index table and mark as potential duplicates
 
     sql = "SELECT name, size, COUNT(*) from file_index GROUP BY name, size HAVING COUNT(*)>1";
 
-    auto rc_duplicate_filename = sqlite3_exec(db, sql, getDuplicateFileNamesCallback, MainWindow::db, &zErrMsg);
+    auto rc_duplicate_filename = sqlite3_exec(db, sql.c_str(), getDuplicateFileNamesCallback, MainWindow::db, &zErrMsg);
 
     if( rc_duplicate_filename != SQLITE_OK ){
         qDebug() << zErrMsg;
@@ -344,7 +357,9 @@ void MainWindow::compareImages(){
 
     image_types = "SELECT extension from image_file_types";
 
-    sql = "SELECT path, name, size from file_index WHERE duplicate = 1 AND type IN (" + image_types + ")";
+    // sql = "SELECT path, name, size from file_index WHERE duplicate = 1 AND type IN (" + image_types + ") GROUP BY name, size ORDER BY name";
+
+    sql = "SELECT path, name, size from file_index WHERE duplicate = 1 AND type IN (" + image_types + ") ORDER BY name";
 
     auto rc_duplicates = sqlite3_exec(db, sql.c_str(), duplicateToArrayCallback, MainWindow::dup_list, &zErrMsg);
 
@@ -403,8 +418,8 @@ void MainWindow::compareImages(){
                     qDebug() << i->path.c_str() << "images match";
                     // TODO: add the source and duplicate file details to the duplicate file list
 
-                    //sql = "INSERT INTO duplicate_file_list (name,size) VALUES ";
-                    sql = "UPDATE file_index set duplicate = 1 WHERE (name = '" + std::string(argv[0]) + "' AND size = " + argv[1] + ");";
+                    sql = "INSERT INTO duplicate_file_list (path, duplicate_path) VALUES ('"+first_item.path+"', '"+i->path+"') ";
+                    //sql = "UPDATE file_index set duplicate = 1 WHERE (name = '" + std::string(argv[0]) + "' AND size = " + argv[1] + ");";
                     //sqlValues = sqlValues + "('" + std::string(argv[0]) + "','" + argv[1] + "')";
 
                     //sql = sql + sqlValues;
@@ -413,7 +428,7 @@ void MainWindow::compareImages(){
 
                     //qDebug() << "Update file_index for duplicates SQL is : " << sql.c_str();
 
-                    auto rc = sqlite3_exec(db1, sql.c_str(), callback, 0, &zErrMsg);
+                    auto rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
 
                     sql ="";
 
