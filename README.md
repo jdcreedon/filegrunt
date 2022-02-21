@@ -12,6 +12,8 @@ sqlite Browser to view sqlite database https://github.com/sqlitebrowser/sqlitebr
 
 # How it works Now
 
+- Performs like a snail when lots of files being processed, expected as much as it's using local database rather than in memory. This helps to troubleshoot.
+
 1. Select a source folder
 2. List of media files added to sqlite database
 3. Duplicates identified by comparing file name and file size
