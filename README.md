@@ -3,6 +3,9 @@ File Interrogation &amp; Processing Utility
 
 This project is under development and is being used to help me learn C++, OpenCV and cross platform development.
 
+![GitHub](https://img.shields.io/github/license/dcreedon/filegrunt)
+![GitHub issues](https://img.shields.io/github/issues/dcreedon/filegrunt)
+
 # Development
 I'm using the CLION IDE on Debian Bullseye and Gnome Desktop as my Development Environment
 
