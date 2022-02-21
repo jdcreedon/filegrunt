@@ -8,6 +8,8 @@ I'm using the CLION IDE on Debian Bullseye and Gnome Desktop as my Development E
 
 I'm using QT Framework 6.2.2, OpenCV 4.5.5 , SQLite 3 and C++ 
 
+sqlite Browser to view sqlite database https://github.com/sqlitebrowser/sqlitebrowser 
+
 # How it works Now
 
 1. Select a source folder
