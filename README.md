@@ -3,7 +3,7 @@ File Interrogation &amp; Processing Utility
 
 This project is under development and is being used to help me learn C++, OpenCV and cross platform development.
 
-![GitHub issues](https://img.shields.io/github/issues/dcreedon/filegrunt)
+![GitHub issues](https://img.shields.io/github/issues/dcreedon/filegrunt).(https://github.com/dcreedon/filegrunt/issues)
 ![GitHub](https://img.shields.io/github/license/dcreedon/filegrunt)
 
 # Development
