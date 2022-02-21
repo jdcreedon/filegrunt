@@ -21,8 +21,13 @@ Allow visual inspection of original and duplicate
 Decide on which one should be classed as a duplicate e.g. earliest date?
 Move the Duplicates to a location for archival/deletion
 Remove the duplicates from the source
+Improve README.md file as I go.
 
 # Working Prototype
 ![image](https://user-images.githubusercontent.com/6379032/155019123-48916c28-0a87-4d0c-a83e-b799b8989361.png)
 
+![image](https://user-images.githubusercontent.com/6379032/155020061-055f2def-3031-4c95-b59c-eb53857136e0.png)
 
+
+# Does it Work
+Initial inspection indicates duplicates are being identified correctly as expected.
