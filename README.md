@@ -35,6 +35,8 @@ Improve README.md file as I go.
 
 ![image](https://user-images.githubusercontent.com/6379032/155020061-055f2def-3031-4c95-b59c-eb53857136e0.png)
 
+![image](https://user-images.githubusercontent.com/6379032/155021832-ac8f13e7-128e-48bc-ba37-b3ba9cb712d9.png)
+
 
 # Does it Work
 Initial inspection indicates duplicates are being identified correctly as expected.
