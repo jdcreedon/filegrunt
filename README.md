@@ -1,5 +1,5 @@
 # FileGrunt
-File Interrogation &amp; Processing Utility
+Utility to identify duplicate files/images and allow the user to move the duplicates to a location for backup or deletion.
 
 This project is under development and is being used to help me learn C++, OpenCV and cross platform development.
 
