@@ -13,6 +13,8 @@ I'm using QT Framework 6.2.2, OpenCV 4.5.5 , SQLite 3 and C++
 
 sqlite Browser to view sqlite database https://github.com/sqlitebrowser/sqlitebrowser 
 
+I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
+
 # How it works Now
 
 - Performs like a snail when lots of files being processed, expected as much as it's using local database rather than in memory. This helps to troubleshoot.
@@ -31,6 +33,7 @@ Move the Duplicates to a location for archival/deletion
 Remove the duplicates from the source
 Improve README.md file as I go.
 Setup Jenkins or Gitlab for CI/CD - probably Gitlab as it's easier
+Figure out how to create a cross platform executable/installation package.
 
 # Working Prototype
 ![image](https://user-images.githubusercontent.com/6379032/155019123-48916c28-0a87-4d0c-a83e-b799b8989361.png)
