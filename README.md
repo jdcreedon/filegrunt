@@ -24,6 +24,7 @@ sqlite Browser to view sqlite database https://github.com/sqlitebrowser/sqlitebr
 5. The duplicates are recorded in the sqlite database
 
 # TODO
+Create a FileGrunt Logo - without this nothing will work!
 Allow visual inspection of original and duplicate
 Decide on which one should be classed as a duplicate e.g. earliest date?
 Move the Duplicates to a location for archival/deletion
