@@ -49,3 +49,4 @@ Initial inspection indicates duplicates are being identified correctly as expect
 
 # Useful Links
 - Markdown Cheat Sheet for README.md https://www.markdownguide.org/cheat-sheet/
+- Open Source Guide https://opensource.guide/
