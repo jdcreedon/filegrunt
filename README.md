@@ -1,4 +1,7 @@
 # FileGrunt
+[![GitHub issues](https://img.shields.io/github/issues/dcreedon/filegrunt)](https://github.com/dcreedon/filegrunt/issues)
+[![GitHub](https://img.shields.io/github/license/dcreedon/filegrunt)](https://github.com/dcreedon/filegrunt/blob/main/LICENSE)
+
 
 ![e077e3b9ef8241e0be0901793a5b967b](https://user-images.githubusercontent.com/6379032/155383375-fbe860ee-1910-4f7a-992e-4572451cc676.png)
 
@@ -7,8 +10,6 @@ Utility to identify duplicate files/images and allow the user to move the duplic
 
 This project is under development and is being used to help me learn C++, OpenCV and cross platform development.
 
-[![GitHub issues](https://img.shields.io/github/issues/dcreedon/filegrunt)](https://github.com/dcreedon/filegrunt/issues)
-[![GitHub](https://img.shields.io/github/license/dcreedon/filegrunt)](https://github.com/dcreedon/filegrunt/blob/main/LICENSE)
 
 # Development
 I'm using the CLION IDE on Debian Bullseye and Gnome Desktop as my Development Environment
