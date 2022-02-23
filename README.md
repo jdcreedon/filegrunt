@@ -1,4 +1,7 @@
 # FileGrunt
+
+![e077e3b9ef8241e0be0901793a5b967b](https://user-images.githubusercontent.com/6379032/155383375-fbe860ee-1910-4f7a-992e-4572451cc676.png)
+
 Utility to identify duplicate files/images and allow the user to move the duplicates to a location for backup or deletion.
 
 This project is under development and is being used to help me learn C++, OpenCV and cross platform development.
@@ -32,7 +35,7 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 - Move the Duplicates to a location for archival/deletion
 - Remove the duplicates from the source
 - Improve README.md file as I go.
-- Setup Jenkins or Gitlab for CI/CD - probably Gitlab as it's easier
+- Setup Gitlab for CI/CD 
 - Figure out how to create a cross platform executable/installation package.
 - Create a Wiki/Issues list and tidy up this file :-)
 
