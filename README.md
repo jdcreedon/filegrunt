@@ -26,15 +26,15 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 5. The duplicates are recorded in the sqlite database
 
 # TODO
-Create a FileGrunt Logo - without this nothing will work!
-Allow visual inspection of original and duplicate
-Decide on which one should be classed as a duplicate e.g. earliest date?
-Move the Duplicates to a location for archival/deletion
-Remove the duplicates from the source
-Improve README.md file as I go.
-Setup Jenkins or Gitlab for CI/CD - probably Gitlab as it's easier
-Figure out how to create a cross platform executable/installation package.
-Create a Wiki/Issues list and tidy up this file :-)
+- Create a FileGrunt Logo - without this nothing will work!
+- Allow visual inspection of original and duplicate
+- Decide on which one should be classed as a duplicate e.g. earliest date?
+- Move the Duplicates to a location for archival/deletion
+- Remove the duplicates from the source
+- Improve README.md file as I go.
+- Setup Jenkins or Gitlab for CI/CD - probably Gitlab as it's easier
+- Figure out how to create a cross platform executable/installation package.
+- Create a Wiki/Issues list and tidy up this file :-)
 
 # Working Prototype
 ![image](https://user-images.githubusercontent.com/6379032/155019123-48916c28-0a87-4d0c-a83e-b799b8989361.png)
