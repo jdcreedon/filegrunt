@@ -48,4 +48,4 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 Initial inspection indicates duplicates are being identified correctly as expected.
 
 # Useful Links
-- (Markdown Cheat Sheet for README.md) https://www.markdownguide.org/cheat-sheet/
+- Markdown Cheat Sheet for README.md https://www.markdownguide.org/cheat-sheet/
