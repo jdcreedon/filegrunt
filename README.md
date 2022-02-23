@@ -1,7 +1,7 @@
 # FileGrunt
-<p align="center">
+
 ![e077e3b9ef8241e0be0901793a5b967b](https://user-images.githubusercontent.com/6379032/155383375-fbe860ee-1910-4f7a-992e-4572451cc676.png)
-</p>
+
 
 Utility to identify duplicate files/images and allow the user to move the duplicates to a location for backup or deletion.
 
