@@ -29,6 +29,7 @@ Decide on which one should be classed as a duplicate e.g. earliest date?
 Move the Duplicates to a location for archival/deletion
 Remove the duplicates from the source
 Improve README.md file as I go.
+Setup Jenkins or Gitlab for CI/CD - probably Gitlab as it's easier
 
 # Working Prototype
 ![image](https://user-images.githubusercontent.com/6379032/155019123-48916c28-0a87-4d0c-a83e-b799b8989361.png)
