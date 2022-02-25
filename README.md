@@ -1,4 +1,4 @@
-# FileGrunt
+# FileGrunt v0.0.0
 [![GitHub issues](https://img.shields.io/github/issues/dcreedon/filegrunt)](https://github.com/dcreedon/filegrunt/issues)
 [![GitHub](https://img.shields.io/github/license/dcreedon/filegrunt)](https://github.com/dcreedon/filegrunt/blob/main/LICENSE)
 
