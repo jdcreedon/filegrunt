@@ -79,6 +79,7 @@ private slots:
     void selectSource();
     void processSource();
     void compareImages();
+    void viewDuplicateImages();
 
 };
 

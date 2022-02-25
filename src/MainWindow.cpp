@@ -36,8 +36,7 @@ MainWindow::MainWindow(QWidget* parent)
     }
 
     //const char * sql= "CREATE TABLE file_index(directory text, name text, size real, type text";
-    //sql = "CREATE TABLE file_index(directory text, name text, size real, type text);";
-    sql = "DELETE FROM source_index;CREATE TABLE source_index(directory text);";
+    sql = "CREATE TABLE source_index(directory text);";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -48,7 +47,18 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Table created successfully";
     }
 
-    sql = "DELETE FROM file_index;CREATE TABLE file_index(path text, name text, size real, type text, duplicate integer);";
+    sql = "DELETE FROM source_index;";
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        qDebug() << "Table contents deleted successfully";
+    }
+
+    sql = "CREATE TABLE file_index(path text, name text, size real, type text, duplicate integer);";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -59,7 +69,18 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Table created successfully";
     }
 
-    sql = "DELETE FROM duplicate_file_list;CREATE TABLE duplicate_file_list(path text, duplicate_path text);";
+    sql = "DELETE FROM file_index;";
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        qDebug() << "Table contents deleted successfully";
+    }
+
+    sql = "CREATE TABLE duplicate_file_list(path text, duplicate_path text);";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -68,6 +89,17 @@ MainWindow::MainWindow(QWidget* parent)
         sqlite3_free(zErrMsg);
     } else {
         qDebug() << "Table created successfully";
+    }
+
+    sql = "DELETE FROM duplicate_file_list;";
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        qDebug() << "Table contents deleted successfully";
     }
 
     sql = "CREATE TABLE image_file_types(type text, extension text)";
@@ -132,6 +164,7 @@ void MainWindow::createActions()
     connect(ui->actionSelect_Source, &QAction::triggered, this, &MainWindow::selectSource);
     connect(ui->actionFind_Duplicates, &QAction::triggered, this, &MainWindow::processSource);
     connect(ui->actionCompare_Images, &QAction::triggered, this, &MainWindow::compareImages);
+    connect(ui->actionView_Duplicates, &QAction::triggered, this, &MainWindow::viewDuplicateImages);
 }
 
 void MainWindow::selectSource() {
@@ -151,12 +184,12 @@ void MainWindow::selectSource() {
 
     // Make data
 
-    List << directory;
+    //List << directory;
 
     // Populate our model
-    model->setStringList(List);
+    //model->setStringList(List);
 
-    ui->listView->setModel(model);
+    //ui->listView->setModel(model);
 
     // Add tp database table
 
@@ -236,38 +269,18 @@ int MainWindow::getDuplicateFileNamesCallback(void *NotUsed, int argc, char **ar
     std::string sql,sqlValues = "";
     db1 = (sqlite3 *) (const char *) NotUsed;
 
-    //for(i = 0; i<argc; i++) {
-        //for (const auto & file : recursive_directory_iterator(argv[i])) {
-            //qDebug() << file.path();
-            //if (!file.is_directory()){
+    sql = "UPDATE file_index set duplicate = 1 WHERE (name = '" + std::string(argv[0]) + "' AND size = " + argv[1] + ");";
 
-                //sql = "INSERT INTO duplicate_file_list (name,size) VALUES ";
-                sql = "UPDATE file_index set duplicate = 1 WHERE (name = '" + std::string(argv[0]) + "' AND size = " + argv[1] + ");";
-                //sqlValues = sqlValues + "('" + std::string(argv[0]) + "','" + argv[1] + "')";
+    auto rc = sqlite3_exec(db1, sql.c_str(), callback, 0, &zErrMsg);
 
-                //sql = sql + sqlValues;
+    sql ="";
 
-                //sqlValues = "";
-
-                //qDebug() << "Update file_index for duplicates SQL is : " << sql.c_str();
-
-                auto rc = sqlite3_exec(db1, sql.c_str(), callback, 0, &zErrMsg);
-
-                sql ="";
-
-                if( rc != SQLITE_OK ){
-                    qDebug() << zErrMsg;
-                    sqlite3_free(zErrMsg);
-                } else {
-                    //qDebug() << "Duplicate insertion completed successfully" << rc;
-                }
-
-           // }
-
-        //}
-        //qDebug() << azColName[i] << argv[i]  << argv[i];
-        //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    //}
+    if( rc != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        //qDebug() << "Duplicate insertion completed successfully" << rc;
+    }
 
     return 0;
 }
@@ -380,7 +393,6 @@ void MainWindow::compareImages(){
 
     //pop the first item in the list and compare it against the subsequent entries that have the same file name
 
-
     do {
         duplicate_data first_item = duplicate_list.front();
         duplicate_list.pop_front();
@@ -416,17 +428,8 @@ void MainWindow::compareImages(){
 
                 if (matrix_zeros == 0) {
                     qDebug() << i->path.c_str() << "images match";
-                    // TODO: add the source and duplicate file details to the duplicate file list
 
                     sql = "INSERT INTO duplicate_file_list (path, duplicate_path) VALUES ('"+first_item.path+"', '"+i->path+"') ";
-                    //sql = "UPDATE file_index set duplicate = 1 WHERE (name = '" + std::string(argv[0]) + "' AND size = " + argv[1] + ");";
-                    //sqlValues = sqlValues + "('" + std::string(argv[0]) + "','" + argv[1] + "')";
-
-                    //sql = sql + sqlValues;
-
-                    //sqlValues = "";
-
-                    //qDebug() << "Update file_index for duplicates SQL is : " << sql.c_str();
 
                     auto rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
 
@@ -452,7 +455,13 @@ void MainWindow::compareImages(){
 
     } while (duplicate_list.size() > 0);
 
-
     qDebug() << "Image Comparison Complete";
+
+}
+
+
+void MainWindow::viewDuplicateImages(){
+
+    qDebug() << "View Duplicates";
 
 }

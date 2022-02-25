@@ -50,6 +50,8 @@
     <addaction name="separator"/>
     <addaction name="actionCompare_Images"/>
     <addaction name="separator"/>
+    <addaction name="actionView_Duplicates"/>
+    <addaction name="separator"/>
     <addaction name="actionMove_Duplicates"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -85,6 +87,7 @@
    <addaction name="actionSelect_Source"/>
    <addaction name="actionFind_Duplicates"/>
    <addaction name="actionCompare_Images"/>
+   <addaction name="actionView_Duplicates"/>
    <addaction name="actionMove_Duplicates"/>
    <addaction name="actionExit"/>
   </widget>
@@ -130,6 +133,11 @@
   <action name="actionMove_Duplicates">
    <property name="text">
     <string>Move Duplicates</string>
+   </property>
+  </action>
+  <action name="actionView_Duplicates">
+   <property name="text">
+    <string>View Duplicates</string>
    </property>
   </action>
  </widget>
