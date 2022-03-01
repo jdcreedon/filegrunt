@@ -52,6 +52,9 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 # Does it Work
 Initial inspection indicates duplicates are being identified correctly as expected.
 
+# Compiling
+Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in BUILDING.
+
 # Useful Links
 - Markdown Cheat Sheet for README.md https://www.markdownguide.org/cheat-sheet/
 - Open Source Guide https://opensource.guide/
