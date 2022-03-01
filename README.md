@@ -53,7 +53,7 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 Initial inspection indicates duplicates are being identified correctly as expected.
 
 # Compiling
-Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in BUILDING.
+Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in [BUILDING](BUILDING.md).
 
 # Useful Links
 - Markdown Cheat Sheet for README.md https://www.markdownguide.org/cheat-sheet/
