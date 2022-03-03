@@ -29,6 +29,7 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 3. Duplicates identified by comparing file name and file size
 4. Duplicate image files are then compared to each other using OpenCV bitwise XOR which results in all zeros if images match
 5. The duplicates are recorded in the sqlite database
+6. The destination directory for the duplicate files can be selected
 
 # TODO
 - Create a FileGrunt Logo - without this nothing will work!
