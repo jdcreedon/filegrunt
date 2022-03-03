@@ -35,7 +35,8 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Opened Database Successfully!";
     }
 
-    //const char * sql= "CREATE TABLE file_index(directory text, name text, size real, type text";
+    // Source Index Table
+
     sql = "CREATE TABLE source_index(directory text);";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
@@ -57,6 +58,32 @@ MainWindow::MainWindow(QWidget* parent)
     } else {
         qDebug() << "Table contents deleted successfully";
     }
+
+    // Destination Index Table
+
+    sql = "CREATE TABLE destination_index(directory text);";
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        qDebug() << "Table created successfully";
+    }
+
+    sql = "DELETE FROM destination_index;";
+
+    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        qDebug() << "Table contents deleted successfully";
+    }
+
+    // File Index Table
 
     sql = "CREATE TABLE file_index(path text, name text, size real, type text, duplicate integer);";
 
@@ -165,6 +192,8 @@ void MainWindow::createActions()
     connect(ui->actionFind_Duplicates, &QAction::triggered, this, &MainWindow::processSource);
     connect(ui->actionCompare_Images, &QAction::triggered, this, &MainWindow::compareImages);
     connect(ui->actionView_Duplicates, &QAction::triggered, this, &MainWindow::viewDuplicateImages);
+    connect(ui->actionSet_Destination, &QAction::triggered, this, &MainWindow::setDestination);
+    connect(ui->actionMove_Duplicates, &QAction::triggered, this, &MainWindow::moveDuplicateImages);
 }
 
 void MainWindow::selectSource() {
@@ -180,7 +209,7 @@ void MainWindow::selectSource() {
     //ui->lineEdit->setText(directory);
 
     // Create model
-    model = new QStringListModel(this);
+    // model = new QStringListModel(this);
 
     // Make data
 
@@ -406,6 +435,10 @@ void MainWindow::compareImages(){
             qDebug() << i->path.c_str() << "Could not open or find the image";
         }
 
+        // sudo apt install libgtk2.0-dev and pkg-config
+
+        cv::imshow("MainWindow", image1);
+
         for (i=duplicate_list.begin();i!=duplicate_list.end();i++){
 
             // compare the image to the subsequent entries that have the same file name
@@ -463,5 +496,36 @@ void MainWindow::compareImages(){
 void MainWindow::viewDuplicateImages(){
 
     qDebug() << "View Duplicates";
+
+}
+
+void MainWindow::setDestination(){
+
+    qDebug() << "Set Destination";
+
+    char *zErrMsg = 0;
+    std::string sql;
+
+    QString directory = QFileDialog::getExistingDirectory(this,"Choose Folder","/home",QFileDialog::ShowDirsOnly|QFileDialog::DontUseNativeDialog|QFileDialog::DontResolveSymlinks|QFileDialog::ReadOnly);
+
+    if (directory.isEmpty())
+        return;
+
+    sql = "INSERT INTO destination_index (directory) VALUES ('"+directory.toStdString()+"') ";
+
+    auto rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+
+    if( rc != SQLITE_OK ){
+        qDebug() << zErrMsg;
+        sqlite3_free(zErrMsg);
+    } else {
+        //qDebug() << "insertion completed successfully" << rc;
+    }
+
+}
+
+void MainWindow::moveDuplicateImages(){
+
+    qDebug() << "Move Duplicates";
 
 }

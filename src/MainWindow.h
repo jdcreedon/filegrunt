@@ -80,6 +80,8 @@ private slots:
     void processSource();
     void compareImages();
     void viewDuplicateImages();
+    void setDestination();
+    void moveDuplicateImages();
 
 };
 
