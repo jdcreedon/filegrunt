@@ -7,3 +7,7 @@ FileGrunt requires Qt,OpenCV as well as SQLite. For more information on Qt pleas
 # Useful Links
 
 https://cmake.org/
+
+# Forking & Branch Build
+When you fork and create a branch and import into CLION right click on CMakeLists.txt and select Reload CMake Project.
+This will create the default debug build and include the source files in the project.

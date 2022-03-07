@@ -43,7 +43,7 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 - Create a Wiki/Issues list and tidy up this file :-)
 
 # Working Prototype
-![image](https://user-images.githubusercontent.com/6379032/155019123-48916c28-0a87-4d0c-a83e-b799b8989361.png)
+![img.png](images/img.png)
 
 ![image](https://user-images.githubusercontent.com/6379032/155020061-055f2def-3031-4c95-b59c-eb53857136e0.png)
 
