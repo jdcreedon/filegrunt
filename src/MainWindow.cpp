@@ -527,5 +527,6 @@ void MainWindow::setDestination(){
 void MainWindow::moveDuplicateImages(){
 
     qDebug() << "Move Duplicates";
+// test fork, branch and commit to main repo from forked repo
 
 }
