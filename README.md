@@ -56,6 +56,9 @@ Initial inspection indicates duplicates are being identified correctly as expect
 # Compiling
 Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in [BUILDING](BUILDING.md).
 
+# Contributing
+Check out our contribution guidelines here [CONTRIBUTING](./docs/CONTRIBUTING.md)
+
 # Useful Links
 - Markdown Cheat Sheet for README.md https://www.markdownguide.org/cheat-sheet/
 - Open Source Guide https://opensource.guide/
