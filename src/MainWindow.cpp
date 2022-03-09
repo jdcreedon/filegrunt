@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Table created successfully";
     }
 
-    sql = "DELETE FROM source_index;";
+    /*sql = "DELETE FROM source_index;";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget* parent)
         sqlite3_free(zErrMsg);
     } else {
         qDebug() << "Table contents deleted successfully";
-    }
+    }*/
 
     // Destination Index Table
 
@@ -437,7 +437,7 @@ void MainWindow::compareImages(){
 
         // sudo apt install libgtk2.0-dev and pkg-config
 
-        cv::imshow("MainWindow", image1);
+        //cv::imshow("MainWindow", image1); //removed as causing error need to debug/fix
 
         for (i=duplicate_list.begin();i!=duplicate_list.end();i++){
 
@@ -465,6 +465,14 @@ void MainWindow::compareImages(){
                     sql = "INSERT INTO duplicate_file_list (path, duplicate_path) VALUES ('"+first_item.path+"', '"+i->path+"') ";
 
                     auto rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+
+                    // put the duplicate image info into an array for use later when moving the image files
+
+                    duplicate_data temp_struct;
+
+                    temp_struct.duplicate_path= i->path;
+
+                    duplicate_images.push_back(temp_struct);
 
                     sql ="";
 
@@ -508,6 +516,8 @@ void MainWindow::setDestination(){
 
     QString directory = QFileDialog::getExistingDirectory(this,"Choose Folder","/home",QFileDialog::ShowDirsOnly|QFileDialog::DontUseNativeDialog|QFileDialog::DontResolveSymlinks|QFileDialog::ReadOnly);
 
+    MainWindow::destination_directory = directory.toStdString(); // Set the destination directory based on what the user has chosen
+
     if (directory.isEmpty())
         return;
 
@@ -522,11 +532,28 @@ void MainWindow::setDestination(){
         //qDebug() << "insertion completed successfully" << rc;
     }
 
+    //TODO: need to check permissions in destination folder
+
 }
 
 void MainWindow::moveDuplicateImages(){
 
-    qDebug() << "Move Duplicates";
-// test fork, branch and commit to main repo from forked repo
+    std::error_code ec;
+    qDebug() << "Move Duplicates 1";
+    // test fork, branch and commit to main repo from forked repo
+
+    // Iterate over the array and copy the files to the destination
+
+    list<duplicate_data>::iterator i;
+
+    do {
+        //duplicate_data first_item = duplicate_list.front();
+        duplicate_data first_item = duplicate_images.front();
+        duplicate_images.pop_front();
+
+        std::filesystem::copy(first_item.duplicate_path, MainWindow::destination_directory, ec);  // copy files only and not sub-directories
+        qDebug() << "Error Code " << ec.message().c_str();
+
+    } while (duplicate_images.size() > 0);
 
 }

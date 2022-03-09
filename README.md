@@ -8,17 +8,17 @@
 
 Utility to identify duplicate files/images and allow the user to move the duplicates to a location for backup or deletion.
 
-This project is under development and is being used to help me learn C++, OpenCV and cross platform development.
-
+This project is under development and is being used to help learn C++, OpenCV and cross platform development. Also being used to learn
+how to setup and structure an Open Source Project.
 
 # Development
-I'm using the CLION IDE on Debian Bullseye and Gnome Desktop as my Development Environment
+CLION IDE on Debian Bullseye and Gnome Desktop as Development Environment
 
-I'm using QT Framework 6.2.2, OpenCV 4.5.5 , SQLite 3 and C++ 
+QT Framework 6.2.2, OpenCV 4.5.5 , SQLite 3 and C++ 
 
 sqlite Browser to view sqlite database https://github.com/sqlitebrowser/sqlitebrowser 
 
-I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
+Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
 # How it works Now
 
@@ -30,14 +30,14 @@ I'm aiming for a cross platform utility that will work on Linux, Mac & Windows.
 4. Duplicate image files are then compared to each other using OpenCV bitwise XOR which results in all zeros if images match
 5. The duplicates are recorded in the sqlite database
 6. The destination directory for the duplicate files can be selected
+7. The duplicate files can be moved to the dstination directory.
 
 # TODO
 - Create a FileGrunt Logo - without this nothing will work!
 - Allow visual inspection of original and duplicate
 - Decide on which one should be classed as a duplicate e.g. earliest date?
-- Move the Duplicates to a location for archival/deletion
 - Remove the duplicates from the source
-- Improve README.md file as I go.
+- Improve README.md file.
 - Setup Gitlab for CI/CD 
 - Figure out how to create a cross platform executable/installation package.
 - Create a Wiki/Issues list and tidy up this file :-)
@@ -55,6 +55,10 @@ Initial inspection indicates duplicates are being identified correctly as expect
 
 # Compiling
 Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in [BUILDING](BUILDING.md).
+
+# Testing
+Plan is to use GitHub Actions
+https://www.incredibuild.com/blog/using-github-actions-with-your-c-project
 
 # Contributing
 Check out our contribution guidelines here [CONTRIBUTING](./docs/CONTRIBUTING.md)
