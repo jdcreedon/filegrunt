@@ -68,6 +68,7 @@ private:
     QAction *actionExit;
     QStringListModel *model;
     QStringList List;
+    std::filesystem::path destination_directory;
     //static sqlite3* db = nullptr;
     sqlite3* db = nullptr;
     std::list<duplicate_data> duplicate_list;
