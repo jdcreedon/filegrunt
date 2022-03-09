@@ -11,6 +11,8 @@ Utility to identify duplicate files/images and allow the user to move the duplic
 This project is under development and is being used to help learn C++, OpenCV and cross platform development. Also being used to learn
 how to setup and structure an Open Source Project.
 
+Please check our [issues](https://github.com/filegrunt/filegrunt/issues) list to see how you can help out.
+
 # Development
 CLION IDE on Debian Bullseye and Gnome Desktop as Development Environment
 
@@ -30,7 +32,7 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 4. Duplicate image files are then compared to each other using OpenCV bitwise XOR which results in all zeros if images match
 5. The duplicates are recorded in the sqlite database
 6. The destination directory for the duplicate files can be selected
-7. The duplicate files can be moved to the dstination directory.
+7. The duplicate files can be "moved" - copied for testing to the destination directory.
 
 # TODO
 - Create a FileGrunt Logo - without this nothing will work!

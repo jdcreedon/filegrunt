@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget* parent)
         qDebug() << "Table created successfully";
     }
 
-    /*sql = "DELETE FROM source_index;";
+    sql = "DELETE FROM source_index;";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget* parent)
         sqlite3_free(zErrMsg);
     } else {
         qDebug() << "Table contents deleted successfully";
-    }*/
+    }
 
     // Destination Index Table
 
@@ -543,15 +543,25 @@ void MainWindow::moveDuplicateImages(){
     // test fork, branch and commit to main repo from forked repo
 
     // Iterate over the array and copy the files to the destination
+    // maintain source directory structure within destination directory
+    // this ensures that integrity of duplicates are maintained as there may be more than one duplicate copied
+    // we don't want to overwrite files if we use a common/shared destination directory
 
     list<duplicate_data>::iterator i;
 
     do {
-        //duplicate_data first_item = duplicate_list.front();
+
         duplicate_data first_item = duplicate_images.front();
         duplicate_images.pop_front();
 
-        std::filesystem::copy(first_item.duplicate_path, MainWindow::destination_directory, ec);  // copy files only and not sub-directories
+        // create the directory structure for the duplicate file using the destination directory as the new root/parent
+        // std::filesystem::create_directories("sandbox/1/2/a");
+        std::filesystem::path destination_sub_directory;
+        destination_sub_directory = MainWindow::destination_directory.c_str() + first_item.duplicate_path;
+        std::filesystem::create_directories(destination_sub_directory.remove_filename());  // a bit dirty probably a cleaner way to do this :-)
+
+        // copy the duplicate file to the destination directory
+        std::filesystem::copy(first_item.duplicate_path, destination_sub_directory.remove_filename(), ec);  // copy files only and not sub-directories
         qDebug() << "Error Code " << ec.message().c_str();
 
     } while (duplicate_images.size() > 0);
