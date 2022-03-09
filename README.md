@@ -34,7 +34,7 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
 # TODO
 - Create a FileGrunt Logo - without this nothing will work!
-- Allow visual inspection of original and duplicate
+- Allow visual inspection of original and duplicates
 - Decide on which one should be classed as a duplicate e.g. earliest date?
 - Remove the duplicates from the source
 - Improve README.md file.
