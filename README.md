@@ -53,7 +53,7 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
 
 # Does it Work
-Initial inspection indicates duplicates are being identified correctly as expected.
+Initial inspection indicates duplicates are being identified correctly as expected and the move duplicates works (kind of).
 
 # Compiling
 Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in [BUILDING](BUILDING.md).
