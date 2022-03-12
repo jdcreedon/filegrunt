@@ -20,56 +20,12 @@ parts:
       - libsqlite3-dev
       - cmake
       - git
+      - qtbase5-dev
+      - qttools5-dev
+      - qttools5-dev-tools
     stage-packages:
       - libsdl-sound1.2
-      - libsdl-net1.2
-      - libxcursor1
-      - libxi6
-      - libxinerama1
-      - libxrandr2
-      - libxrender1
-      - libopenal1
-      - libsndio6.1
-      - libspeex1
-      - libvorbisfile3
-      - libwayland-client0
-      - libwayland-cursor0
-      - libwayland-egl1-mesa
-      - libxkbcommon0
-      - libglu1-mesa
-      - libasound2
-      - libasyncns0
-      - libbsd0
-      - libcaca0
-      - libdbus-1-3
-      - libflac8
-      - libgcc1
-      - libgcrypt20
-      - libgl1
-      - libglvnd0
-      - libglx0
-      - libgpg-error0
-      - liblz4-1
-      - liblzma5
-      - libncursesw5
-      - libogg0
-      - libpng16-16
-      - libpulse0
-      - libsdl1.2debian
-      - libslang2
-      - libsndfile1
-      - libstdc++6
-      - libsystemd0
-      - libtinfo5
-      - libvorbis0a
-      - libvorbisenc2
-      - libwrap0
-      - libx11-6
-      - libxau6
-      - libxcb1
-      - libxdmcp6
-      - libxext6
-      - zlib1g
+
 
 apps:
   filegrunt:
