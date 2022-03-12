@@ -12,7 +12,6 @@ type: app
 parts:
   filegrunt:
     plugin: autotools
-    source-type: tar
     source: https://github.com/filegrunt/filegrunt.git
     build-packages:
       - build-essential
