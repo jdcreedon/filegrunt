@@ -7,6 +7,7 @@ confinement: devmode
 icon: images/icon.png
 base: core18
 grade: devel
+type: app
 
 parts:
   filegrunt:
@@ -14,13 +15,11 @@ parts:
     source-type: tar
     source: https://github.com/filegrunt/filegrunt.git
     build-packages:
+      - build-essential
       - g++
-      - make
-      - libsdl1.2-dev
-      - libpng-dev
-      - libsdl-net1.2-dev
-      - libsdl-sound1.2-dev
-      - libasound2-dev
+      - libsqlite3-dev
+      - cmake
+      - git
     stage-packages:
       - libsdl-sound1.2
       - libsdl-net1.2
