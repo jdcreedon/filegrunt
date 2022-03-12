@@ -39,6 +39,9 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 - Allow visual inspection of original and duplicates
 - Decide on which one should be classed as a duplicate e.g. earliest date?
 - Remove the duplicates from the source
+- Allow use of in memory database as an alternative to offline database
+- Combine Find Duplicates, Compare Images and View Duplicates into one process that displays images after duplicates found
+- Move Set destination step to start of process
 - Improve README.md file.
 - Setup Gitlab for CI/CD 
 - Figure out how to create a cross platform executable/installation package.
