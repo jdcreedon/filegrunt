@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget* parent)
 {
     //std::string *sql;
     char *zErrMsg = 0;
-    char *sql = "";
+    char *sql;
 
     ui->setupUi(this);
 
@@ -167,7 +167,7 @@ MainWindow::MainWindow(QWidget* parent)
 int MainWindow::callback(void *NotUsed, int argc, char **argv, char **azColName){
     int i;
     for(i = 0; i<argc; i++) {
-        //qDebug() << azColName[i] << argv[i]  << argv[i];
+        qDebug() << azColName[i] << argv[i]  << argv[i];
         //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
     }
 
@@ -258,7 +258,7 @@ int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **az
 
     //for(i = 0; i<argc; i++) {
         for (const auto & file : recursive_directory_iterator(argv[i])) {
-            qDebug() << file.path();
+            // qDebug() << file.path().c_str();
             if (!file.is_directory()){
 
                 sql = "INSERT INTO file_index (path,name,size,type) VALUES ";
@@ -268,23 +268,23 @@ int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **az
 
                 sqlValues = "";
 
-                //qDebug() << "Insert into file_index SQL is : " << sql.c_str();
+                //// qDebug() << "Insert into file_index SQL is : " << sql.c_str();
 
                 auto rc = sqlite3_exec(db1, sql.c_str(), callback, 0, &zErrMsg);
 
                 sql ="";
 
                 if( rc != SQLITE_OK ){
-                    qDebug() << zErrMsg;
+                    // qDebug() << zErrMsg;
                     sqlite3_free(zErrMsg);
                 } else {
-                    //qDebug() << "File insertion completed successfully" << rc;
+                    //// qDebug() << "File insertion completed successfully" << rc;
                 }
 
             }
 
         }
-        //qDebug() << azColName[i] << argv[i]  << argv[i];
+        //// qDebug() << azColName[i] << argv[i]  << argv[i];
         //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
     //}
 
@@ -305,10 +305,10 @@ int MainWindow::getDuplicateFileNamesCallback(void *NotUsed, int argc, char **ar
     sql ="";
 
     if( rc != SQLITE_OK ){
-        qDebug() << zErrMsg;
+        // qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        //qDebug() << "Duplicate insertion completed successfully" << rc;
+        //// qDebug() << "Duplicate insertion completed successfully" << rc;
     }
 
     return 0;
@@ -327,10 +327,10 @@ void MainWindow::processSource() {
     auto rc = sqlite3_exec(db, sql.c_str(), getFilesCallback, MainWindow::db, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        qDebug() << zErrMsg;
+        // qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        qDebug() << "File List returned successfully" << rc;
+        // qDebug() << "File List returned successfully" << rc;
     }
 
     //2. Remove the files that are not in the file extension types we are comparing
@@ -344,10 +344,10 @@ void MainWindow::processSource() {
     auto rc_duplicates = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
 
     if( rc_duplicates != SQLITE_OK ){
-        qDebug() << zErrMsg;
+        // qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        qDebug() << "Deleted unneeded files" << rc_duplicates;
+        // qDebug() << "Deleted unneeded files" << rc_duplicates;
     }
 
     //3. Check for duplicate names and sizes in the name column and update file index table and mark as potential duplicates
@@ -357,10 +357,10 @@ void MainWindow::processSource() {
     auto rc_duplicate_filename = sqlite3_exec(db, sql.c_str(), getDuplicateFileNamesCallback, MainWindow::db, &zErrMsg);
 
     if( rc_duplicate_filename != SQLITE_OK ){
-        qDebug() << zErrMsg;
+        // qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        qDebug() << "Duplicates identified successfully" << rc_duplicate_filename;
+        // qDebug() << "Duplicates identified successfully" << rc_duplicate_filename;
     }
 
 }
@@ -379,7 +379,7 @@ int MainWindow::duplicateToArrayCallback(void *NotUsed, int argc, char **argv, c
 
     head->push_back(temp_struct);
 
-    ///qDebug() << " = " << argv[i];
+    ///// qDebug() << " = " << argv[i];
 
     return 0;
 }
@@ -390,7 +390,7 @@ void MainWindow::compareImages(){
     //char *sql = "";
     std::string image_types, sql;
 
-    qDebug() << "Image Comparison Started";
+    // qDebug() << "Image Comparison Started";
 
     //3.  Check if the duplicate image files contain the same data as well as having the same name and size
     // add video comparison exclude other file types
@@ -406,10 +406,10 @@ void MainWindow::compareImages(){
     auto rc_duplicates = sqlite3_exec(db, sql.c_str(), duplicateToArrayCallback, MainWindow::dup_list, &zErrMsg);
 
     if( rc_duplicates != SQLITE_OK ){
-        qDebug() << zErrMsg;
+        // qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        qDebug() << "Duplicates identified successfully" << rc_duplicates;
+        // qDebug() << "Duplicates identified successfully" << rc_duplicates;
     }
 
     // step through the queue
@@ -432,7 +432,7 @@ void MainWindow::compareImages(){
         // Check for failure
         if (image1.empty())
         {
-            qDebug() << i->path.c_str() << "Could not open or find the image";
+            // qDebug() << i->path.c_str() << "Could not open or find the image";
         }
 
         // sudo apt install libgtk2.0-dev and pkg-config
@@ -449,7 +449,7 @@ void MainWindow::compareImages(){
                 // Check for failure
                 if (image2.empty())
                 {
-                    qDebug() << i->path.c_str() << "Could not open or find the image";
+                    // qDebug() << i->path.c_str() << "Could not open or find the image";
                 }
 
                 //compare the images, if the same then add the first_item to duplicate_images along with the path of the duplicate and end continue the for
@@ -457,10 +457,10 @@ void MainWindow::compareImages(){
                 cv::Mat res_xor;
                 bitwise_xor(image1, image2,res_xor);  // Result all zero means a match
                 int matrix_zeros = countNonZero(res_xor);
-                qDebug() << "Matrix size: " << matrix_zeros;
+                // qDebug() << "Matrix size: " << matrix_zeros;
 
                 if (matrix_zeros == 0) {
-                    qDebug() << i->path.c_str() << "images match";
+                    // qDebug() << i->path.c_str() << "images match";
 
                     sql = "INSERT INTO duplicate_file_list (path, duplicate_path) VALUES ('"+first_item.path+"', '"+i->path+"') ";
 
@@ -477,14 +477,14 @@ void MainWindow::compareImages(){
                     sql ="";
 
                     if( rc != SQLITE_OK ){
-                        qDebug() << zErrMsg;
+                        // qDebug() << zErrMsg;
                         sqlite3_free(zErrMsg);
                     } else {
-                        //qDebug() << "Duplicate insertion completed successfully" << rc;
+                        //// qDebug() << "Duplicate insertion completed successfully" << rc;
                     }
 
                 } else {
-                    qDebug() << i->path.c_str() << "no image match";
+                    // qDebug() << i->path.c_str() << "no image match";
                 }
 
             }else{
@@ -496,7 +496,7 @@ void MainWindow::compareImages(){
 
     } while (duplicate_list.size() > 0);
 
-    qDebug() << "Image Comparison Complete";
+    // qDebug() << "Image Comparison Complete";
 
 }
 
@@ -509,7 +509,7 @@ void MainWindow::viewDuplicateImages(){
 
 void MainWindow::setDestination(){
 
-    qDebug() << "Set Destination";
+    // qDebug() << "Set Destination";
 
     char *zErrMsg = 0;
     std::string sql;
@@ -526,10 +526,10 @@ void MainWindow::setDestination(){
     auto rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        qDebug() << zErrMsg;
+        // qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        //qDebug() << "insertion completed successfully" << rc;
+        //// qDebug() << "insertion completed successfully" << rc;
     }
 
     //TODO: need to check permissions in destination folder
@@ -539,8 +539,7 @@ void MainWindow::setDestination(){
 void MainWindow::moveDuplicateImages(){
 
     std::error_code ec;
-    qDebug() << "Move Duplicates 1";
-    // test fork, branch and commit to main repo from forked repo
+    // qDebug() << "Move Duplicates 1";
 
     // Iterate over the array and copy the files to the destination
     // maintain source directory structure within destination directory

@@ -47,6 +47,19 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 - Figure out how to create a cross platform executable/installation package.
 - Create a Wiki/Issues list and tidy up this file :-)
 
+## Snap packages
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/filegrunt)
+
+#### Snap Nightlies
+
+     snap install filegrunt --devmode
+
+#### Snap Stable
+
+     snap install filegrunt
+
+
 # Working Prototype
 ![img.png](images/img.png)
 

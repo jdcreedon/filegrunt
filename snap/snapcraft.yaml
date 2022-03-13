@@ -11,7 +11,7 @@ type: app
 
 parts:
   filegrunt:
-    plugin: autotools
+    plugin: nil
     source: https://github.com/filegrunt/filegrunt.git
     build-packages:
       - build-essential
@@ -22,13 +22,15 @@ parts:
       - qtbase5-dev
       - qttools5-dev
       - qttools5-dev-tools
+      - libqt5scintilla2-dev
+      - libopencv-dev
     stage-packages:
-      - libsdl-sound1.2
-
+      - libgl1
+      - libglu1-mesa
+      - libglx0
 
 apps:
   filegrunt:
-    command: filegrunt
+    command: /mnt/ntfs1/Development/CLionProjects/filegrunt/cmake-build-debug/filegrunt
     environment:
-      "LD_LIBRARY_PATH": "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio"
       "DISABLE_WAYLAND": "1"

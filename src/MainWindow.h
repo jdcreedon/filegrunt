@@ -11,6 +11,7 @@
 #include <QFileDialog>
 #include <QStringList>
 #include <QStringListModel>
+#include <QDebug>
 #include <filesystem>
 #include <string>
 #include <list>
