@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.21)
-
-# set the project name
-project(FileGrunt     VERSION 0.0.0
+project(filegrunt     VERSION 0.0.0
         DESCRIPTION "Utility to identify duplicate files/images and allow the user to move the duplicates to a location for backup or deletion.")
 
 OPTION(sqlcipher "Build with SQLCipher library" OFF)
+# https://stackoverflow.com/questions/34143265/undefined-reference-to-symbol-pthread-createglibc-2-2-5
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
@@ -17,43 +17,22 @@ elseif(WIN32)
     add_executable(${PROJECT_NAME} WIN32)
 else()
     add_executable(${PROJECT_NAME})
+    #add_executable(filegrunt src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
+    #add_executable(${PROJECT_NAME} src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
 endif()
 
-set(CMAKE_PREFIX_PATH  "/mnt/ntfs1/Development/Qt/6.2.2/gcc_64/lib/cmake/")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
+set(CMAKE_PREFIX_PATH  "/mnt/ntfs1/Development/Qt/5.15.2/gcc_64/lib/cmake/")
+set(QT_VERSION 5)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
 set(OpenCV_DIR "/mnt/ntfs1/Development/opencv-4.5.5/x64_build/")
-
-set(CMAKE_CXX_STANDARD 14)
 set(OpenCV_FOUND 1)
-FIND_PACKAGE( OpenCV REQUIRED)
+
+
+find_package( OpenCV REQUIRED)
 find_package(PkgConfig REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-
-find_package(Qt6 COMPONENTS
-        Core
-        Gui
-        Widgets
-        REQUIRED)
-
-# add the executable
-#add_executable(FileGrunt src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
-
-target_link_libraries(FileGrunt
-        Qt6::Core
-        Qt6::Gui
-        Qt6::Widgets
-        sqlite3
-        ${CMAKE_DL_LIBS}
-        ${OpenCV_LIBS}
-        ${LIBSQLITE}
-        ${QT_LIBS}
-        )
-
-message(STATUS "OpenCV library status:")
-message(STATUS "    version: ${OpenCV_VERSION}")
-message(STATUS "    libraries: ${OpenCV_LIBS}")
-message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
 target_sources(${PROJECT_NAME}
         PRIVATE
@@ -65,4 +44,17 @@ target_sources(${PROJECT_NAME}
         src/sqlite3.c
         )
 
+set(QT_LIBS Qt5::Gui Qt5::Widgets Qt5::Core)
 
+target_link_libraries(${PROJECT_NAME}
+        sqlite3
+        ${CMAKE_DL_LIBS}
+        ${OpenCV_LIBS}
+        ${LIBSQLITE}
+        ${QT_LIBS}
+        )
+
+message(STATUS "OpenCV library status:")
+message(STATUS "    version: ${OpenCV_VERSION}")
+message(STATUS "    libraries: ${OpenCV_LIBS}")
+message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
