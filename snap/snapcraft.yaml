@@ -3,55 +3,50 @@ version: "0.0"
 summary: Image File Comparison Utility
 description: |
   Utility to identify duplicate files/images and allow the user to move the duplicates to a location for archival or deletion.
+###confinement: devmode
 confinement: devmode
-icon: images/icon.png
+
+###icon: ../images/icon.png
 base: core18
 compression: lzo
 grade: devel
 type: app
 
-###architectures:
-###  - build-on: amd64
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: armhf
+  - build-on: ppc64el
 
 apps:
   filegrunt:
+    #####command: /usr/local/bin/filegrunt
     command: /usr/local/bin/filegrunt
     environment:
-      "DISABLE_WAYLAND": "1"
-      ###TMPDIR:           $XDG_RUNTIME_DIR
+      DISABLE_WAYLAND: "1"
     plugs:
       - desktop
       - gsettings
       - home
-      ###- unity7
       - wayland
       - x11
       - removable-media
 
+build-packages:
+  - build-essential
+  - g++
+  - libsqlite3-dev
+  - cmake
+  - git
+  - qtbase5-dev
+  - qttools5-dev
+  - qttools5-dev-tools
+  - libopencv-dev
+
 parts:
   filegrunt:
     plugin: nil
-    ###cmake-parameters:   ["-DUSE_QT5=True", "-Dsqlcipher=1", "-Wno-dev","-DSQLITE_ENABLE_JSON1=1"]
-    ###configflags:
-      ### - "-DKDE_INSTALL_USE_QT_SYS_PATHS=ON"
-      ### - DCMAKE_INSTALL_PREFIX=
-      ### - "-DCMAKE_BUILD_TYPE=Release"
-      ### - "-DENABLE_TESTING=OFF"
-      ### - "-DBUILD_TESTING=OFF"
-      ### - "-DKDE_SKIP_TEST_SETTINGS=ON"
-    ###source: https://github.com/filegrunt/filegrunt.git
     source: .
-    build-packages:
-      - build-essential
-      - g++
-      - libsqlite3-dev
-      - cmake
-      - git
-      - qtbase5-dev
-      - qttools5-dev
-      - qttools5-dev-tools
-      ###- libqt5scintilla2-dev
-      - libopencv-dev
     stage-packages:
       - libgl1
       - libglu1-mesa
