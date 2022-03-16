@@ -92,3 +92,4 @@ Check out our contribution guidelines here [CONTRIBUTING](./docs/CONTRIBUTING.md
 - https://www.freelogodesign.org/
 - https://www.sqlite.org/
 - Snapcraft Demo https://youtu.be/BEp_l2oUcD8
+- First Snap https://medium.com/geekculture/how-i-made-my-first-snap-470d22eb621a

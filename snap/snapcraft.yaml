@@ -5,8 +5,7 @@ description: |
   Utility to identify duplicate files/images and allow the user to move the duplicates to a location for archival or deletion.
 ###confinement: devmode
 confinement: devmode
-
-###icon: ../images/icon.png
+icon: images/icon.png
 base: core18
 compression: lzo
 grade: devel
@@ -14,9 +13,9 @@ type: app
 
 architectures:
   - build-on: amd64
-  - build-on: arm64
-  - build-on: armhf
-  - build-on: ppc64el
+  ###- build-on: arm64
+  ###- build-on: armhf
+  ###- build-on: ppc64el
 
 apps:
   filegrunt:
@@ -46,7 +45,8 @@ build-packages:
 parts:
   filegrunt:
     plugin: nil
-    source: .
+    source-type: git
+    source: https://github.com/filegrunt/filegrunt.git
     stage-packages:
       - libgl1
       - libglu1-mesa
