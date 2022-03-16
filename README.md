@@ -53,11 +53,16 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
 #### Snap Nightlies
 
-     snap install filegrunt --devmode
+     snap install filegrunt --edge --devmode
+
+#### To Remove
+
+    sudo snap remove filegrunt
+
 
 #### Snap Stable
 
-     snap install filegrunt
+     working on it :-)
 
 
 # Working Prototype
@@ -86,3 +91,4 @@ Check out our contribution guidelines here [CONTRIBUTING](./docs/CONTRIBUTING.md
 - Open Source Guide https://opensource.guide/
 - https://www.freelogodesign.org/
 - https://www.sqlite.org/
+- Snapcraft Demo https://youtu.be/BEp_l2oUcD8
