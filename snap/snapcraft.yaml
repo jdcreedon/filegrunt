@@ -4,7 +4,7 @@ summary: Image File Comparison Utility
 description: |
   Utility to identify duplicate files/images and allow the user to move the duplicates to a location for archival or deletion.
 ###confinement: devmode
-confinement: devmode
+confinement: strict
 icon: images/icon.png
 base: core18
 compression: lzo
