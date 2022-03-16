@@ -1,15 +1,24 @@
-cmake_minimum_required(VERSION 3.21)
-project(filegrunt     VERSION 0.0.0
+cmake_minimum_required(VERSION 3.16)
+project(filegrunt     VERSION 0.0
         DESCRIPTION "Utility to identify duplicate files/images and allow the user to move the duplicates to a location for backup or deletion.")
 
+OPTION(BUILD_STABLE_VERSION "Don't build the stable version by default" OFF) # Choose between building a stable version or nightly (the default), depending on whether '-DBUILD_STABLE_VERSION=1' is passed on the command line or not.
+
 OPTION(sqlcipher "Build with SQLCipher library" OFF)
+# BUILD_VERSION is the current date in YYYYMMDD format. It is only
+# used by the nightly version to add the date of the build.
+string(TIMESTAMP BUILD_VERSION "%Y%m%d")
+
 # https://stackoverflow.com/questions/34143265/undefined-reference-to-symbol-pthread-createglibc-2-2-5
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
+#set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 if(APPLE)
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE)
@@ -19,12 +28,13 @@ else()
     add_executable(${PROJECT_NAME})
     #add_executable(filegrunt src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
     #add_executable(${PROJECT_NAME} src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
+    #add_executable(${PROJECT_NAME} src/main.cpp src/MainWindow.cpp src/sqlite3.c src/MainWindow.ui)
 endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
 set(CMAKE_PREFIX_PATH  "/mnt/ntfs1/Development/Qt/5.15.2/gcc_64/lib/cmake/")
 set(QT_VERSION 5)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 set(OpenCV_DIR "/mnt/ntfs1/Development/opencv-4.5.5/x64_build/")
 set(OpenCV_FOUND 1)
 
@@ -32,7 +42,7 @@ set(OpenCV_FOUND 1)
 find_package( OpenCV REQUIRED)
 find_package(PkgConfig REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Gui Widgets)
 
 target_sources(${PROJECT_NAME}
         PRIVATE
@@ -53,6 +63,15 @@ target_link_libraries(${PROJECT_NAME}
         ${LIBSQLITE}
         ${QT_LIBS}
         )
+
+#if(NOT WIN32 AND NOT APPLE)
+#    install(TARGETS ${PROJECT_NAME}
+#            RUNTIME DESTINATION bin
+#            LIBRARY DESTINATION lib
+#            )
+#endif()
+
+
 
 message(STATUS "OpenCV library status:")
 message(STATUS "    version: ${OpenCV_VERSION}")
