@@ -20,7 +20,7 @@ architectures:
 apps:
   filegrunt:
     #####command: /usr/local/bin/filegrunt
-    command: /usr/local/bin/filegrunt
+    command: /bin/filegrunt
     environment:
       DISABLE_WAYLAND: "1"
     plugs:
