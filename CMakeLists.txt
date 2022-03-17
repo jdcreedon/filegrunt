@@ -9,8 +9,6 @@ OPTION(sqlcipher "Build with SQLCipher library" OFF)
 # used by the nightly version to add the date of the build.
 #string(TIMESTAMP BUILD_VERSION "%Y%m%d")
 
-
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -19,16 +17,16 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-#if(APPLE)
-#    add_executable(${PROJECT_NAME} MACOSX_BUNDLE)
-#elseif(WIN32)
-#    add_executable(${PROJECT_NAME} WIN32)
-#else()
-    #add_executable(${PROJECT_NAME})
-    add_executable(filegrunt src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
+if(APPLE)
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE)
+elseif(WIN32)
+    add_executable(${PROJECT_NAME} WIN32)
+else()
+    add_executable(${PROJECT_NAME})
+    #add_executable(filegrunt src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
     #add_executable(${PROJECT_NAME} src/main.cpp src/MainWindow.h src/MainWindow.cpp src/sqlite3.h src/sqlite3.c src/MainWindow.ui)
     #add_executable(${PROJECT_NAME} src/main.cpp src/MainWindow.cpp src/sqlite3.c src/MainWindow.ui)
-#endif()
+endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
 set(CMAKE_PREFIX_PATH  "/mnt/ntfs1/Development/Qt/5.15.2/gcc_64/lib/cmake/")
@@ -68,21 +66,27 @@ target_link_libraries(${PROJECT_NAME}
         ${OpenCV_LIBS}
         )
 
+if(UNIX)
+    install(FILES images/icon.png
+            DESTINATION share/icons/hicolor/scalable/apps/
+            RENAME ${PROJECT_NAME}.png
+            )
+
+    install(FILES distri/${PROJECT_NAME}.desktop
+            DESTINATION share/applications/
+            )
+
+    install(FILES distri/${PROJECT_NAME}.desktop.appdata.xml
+            DESTINATION share/metainfo/
+            )
+endif()
+
 if(NOT WIN32 AND NOT APPLE)
     install(TARGETS ${PROJECT_NAME}
             RUNTIME DESTINATION bin
             LIBRARY DESTINATION lib
             )
 endif()
-
-#if(NOT WIN32 AND NOT APPLE)
-#    install(TARGETS ${PROJECT_NAME}
-#            RUNTIME DESTINATION bin
-#            LIBRARY DESTINATION lib
-#            )
-#endif()
-
-
 
 #message(STATUS "OpenCV library status:")
 #message(STATUS "    version: ${OpenCV_VERSION}")

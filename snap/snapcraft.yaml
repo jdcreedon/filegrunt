@@ -20,9 +20,23 @@ architectures:
 apps:
   filegrunt:
     command: usr/local/bin/filegrunt
-    ###command: /usr/local/bin/filegrunt
+    command-chain:
+      - bin/desktop-launch
+      - usr/local/bin/filegrunt
+    desktop: usr/local/share/applications/filegrunt.desktop
     environment:
       DISABLE_WAYLAND: 1
+      TMPDIR: $XDG_RUNTIME_DIR
+      XLOCALEDIR: '$SNAP/usr/share/X11/locale'
+      LOCPATH: '$SNAP/usr/lib/locale'
+      GTK_PATH: $SNAP/lib/gtk-2.0
+      GTK_DATA_PREFIX: $SNAP
+      XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+      XDG_CONFIG_HOME: '$HOME/.config'
+      XKB_CONFIG_ROOT: '$SNAP/usr/share/X11/xkb'
+      XDG_CONFIG_DIRS: '$SNAP/etc/xdg:$XDG_CONFIG_DIRS'
+      XDG_DATA_HOME: '$SNAP/usr/share'
+      QT_QPA_PLATFORMTHEME: qt5ct
     plugs:
       - desktop
       - gsettings
@@ -36,7 +50,7 @@ build-packages:
   - build-essential
   - g++
   - libsqlite3-dev
-  - libqt5scintilla2-dev
+  #- libqt5scintilla2-dev
   - cmake
   - git
   - qtbase5-dev
@@ -46,10 +60,61 @@ build-packages:
 
 parts:
   filegrunt:
-    plugin: nil
-    source-type: git
-    source: https://github.com/filegrunt/filegrunt.git
+    plugin: cmake
+    cmake-parameters:   ["-DUSE_QT5=True", "-Dsqlcipher=1", "-Wno-dev","-DSQLITE_ENABLE_JSON1=1"]
+    source: .
+  desktop-qt5:
+    build-packages:
+      - qtbase5-dev
+      - dpkg-dev
+      - libgtk-3-dev
+    make-parameters:
+      - FLAVOR=qt5
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: qt
     stage-packages:
-      - libgl1
-      - libglu1-mesa
-      - libglx0
+      - libxkbcommon0
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgtk-3-0
+      - libqt5gui5
+      - libgdk-pixbuf2.0-0
+      - libqt5svg5
+      - libglib2.0-bin
+      - libgtk-3-bin
+      - unity-gtk3-module
+      - libappindicator3-1
+      - locales-all
+      - xdg-user-dirs
+      - ibus-gtk3
+      - libibus-1.0-5
+      - libgtk2.0-0
+      - qt5-image-formats-plugins
+  dump:
+    source: .
+    plugin: dump
+    after:
+      - desktop-qt5
+      - filegrunt
+    stage-packages:
+      - libc6
+      - libgcc1
+      - libsqlite3-0
+      - libstdc++6
+      - libsqlcipher-dev
+      - libatk-adaptor
+      - libgail-common
+      - libgail-3-0
+      - libgail-3-dev
+      - libgail-dev
+      - qtwayland5
+      - libqscintilla2-qt5-15
+      - libqt5printsupport5
+      - libqt5xml5
+      - libsqlcipher0
+      - libgtk-3-0

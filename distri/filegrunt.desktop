@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Duplicate Image Utility
+Comment=FileGrunt is a duplicate image checker utility
+Exec=filegrunt %f
+Icon=filegrunt
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=Utility;
+MimeType=application/vnd.db4s-project+xml;application/filegrunt;application/x-filegrunt;application/vnd.sqlite3;application/geopackage+sqlite3;application/x-sqlite2;application/x-sqlite3;text/csv;
+StartupWMClass=filegrunt
