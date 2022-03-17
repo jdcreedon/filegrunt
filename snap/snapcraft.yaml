@@ -1,32 +1,33 @@
 name: filegrunt
-version: "0.0"
+version: "0.0.0"
+base: core20
 summary: Image File Comparison Utility
 description: |
   Utility to identify duplicate files/images and allow the user to move the duplicates to a location for archival or deletion.
 ###confinement: devmode
 confinement: strict
-icon: images/icon.png
-base: core20
-compression: lzo
 grade: devel
+icon: images/icon.png
 type: app
 
 architectures:
   - build-on: amd64
+    run-on: amd64
   ###- build-on: arm64
   ###- build-on: armhf
   ###- build-on: ppc64el
 
 apps:
   filegrunt:
-    #####command: /usr/local/bin/filegrunt
-    command: /bin/filegrunt
+    command: usr/local/bin/filegrunt
+    ###command: /usr/local/bin/filegrunt
     environment:
-      DISABLE_WAYLAND: "1"
+      DISABLE_WAYLAND: 1
     plugs:
       - desktop
       - gsettings
       - home
+      - unity7
       - wayland
       - x11
       - removable-media
@@ -35,6 +36,7 @@ build-packages:
   - build-essential
   - g++
   - libsqlite3-dev
+  - libqt5scintilla2-dev
   - cmake
   - git
   - qtbase5-dev
