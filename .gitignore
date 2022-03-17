@@ -2,6 +2,7 @@
 /cmake-build-release/
 /.idea/
 *.snap
+*.idea
 /.snap/
 Makefile
 CMakeLists.txt.user
