@@ -38,6 +38,7 @@ set(OpenCV_DIR "/mnt/ntfs1/Development/opencv-4.5.5/x64_build/")
 find_package( OpenCV REQUIRED)
 #find_package(PkgConfig REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
+
 find_package(Qt5 REQUIRED COMPONENTS Gui Widgets)
 
 target_sources(${PROJECT_NAME}
