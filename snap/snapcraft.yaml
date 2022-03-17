@@ -6,7 +6,7 @@ description: |
 ###confinement: devmode
 confinement: strict
 icon: images/icon.png
-base: core18
+base: core20
 compression: lzo
 grade: devel
 type: app
