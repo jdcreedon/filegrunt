@@ -80,6 +80,10 @@ if(UNIX)
     install(FILES distri/${PROJECT_NAME}.desktop.appdata.xml
             DESTINATION share/metainfo/
             )
+
+    #install(FILES data/offline.db
+    #        DESTINATION ${HOME}/data/
+    #        )
 endif()
 
 if(NOT WIN32 AND NOT APPLE)

@@ -1,10 +1,10 @@
 name: filegrunt
 version: "0.0.0"
 base: core20
+compression: lzo
 summary: Image File Comparison Utility
 description: |
   Utility to identify duplicate files/images and allow the user to move the duplicates to a location for archival or deletion.
-###confinement: devmode
 confinement: strict
 grade: devel
 icon: images/icon.png
@@ -13,9 +13,6 @@ type: app
 architectures:
   - build-on: amd64
     run-on: amd64
-  ###- build-on: arm64
-  ###- build-on: armhf
-  ###- build-on: ppc64el
 
 apps:
   filegrunt:
@@ -25,17 +22,6 @@ apps:
       - usr/local/bin/filegrunt
     desktop: usr/local/share/applications/filegrunt.desktop
     environment:
-      DISABLE_WAYLAND: 1
-      TMPDIR: $XDG_RUNTIME_DIR
-      XLOCALEDIR: '$SNAP/usr/share/X11/locale'
-      LOCPATH: '$SNAP/usr/lib/locale'
-      GTK_PATH: $SNAP/lib/gtk-2.0
-      GTK_DATA_PREFIX: $SNAP
-      XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
-      XDG_CONFIG_HOME: '$HOME/.config'
-      XKB_CONFIG_ROOT: '$SNAP/usr/share/X11/xkb'
-      XDG_CONFIG_DIRS: '$SNAP/etc/xdg:$XDG_CONFIG_DIRS'
-      XDG_DATA_HOME: '$SNAP/usr/share'
       QT_QPA_PLATFORMTHEME: qt5ct
     plugs:
       - desktop
@@ -50,7 +36,6 @@ build-packages:
   - build-essential
   - g++
   - libsqlite3-dev
-  #- libqt5scintilla2-dev
   - cmake
   - git
   - qtbase5-dev
@@ -61,27 +46,27 @@ build-packages:
 parts:
   filegrunt:
     plugin: cmake
-    cmake-parameters:   ["-DUSE_QT5=True", "-Dsqlcipher=1", "-Wno-dev","-DSQLITE_ENABLE_JSON1=1"]
+    #cmake-parameters:   ["-DUSE_QT5=True"]
     source: .
   desktop-qt5:
-    build-packages:
-      - qtbase5-dev
-      - dpkg-dev
-      - libgtk-3-dev
-      - libopencv-dev
     make-parameters:
       - FLAVOR=qt5
     plugin: make
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
+    organize:
+      usr/lib/*-linux-gnu/blas/*: usr/lib/
+      usr/lib/*-linux-gnu/lapack/*: usr/lib/
+    build-packages:
+      - build-essential
+      - qtbase5-dev
+      - dpkg-dev
+      - libgtk-3-dev
+      - libopencv-dev
     stage-packages:
+      - libatlas-base-dev
       - libxkbcommon0
-      - ttf-ubuntu-font-family
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
       - gnome-themes-standard
-      - shared-mime-info
       - libgtk-3-0
       - libqt5gui5
       - libgdk-pixbuf2.0-0
@@ -90,8 +75,6 @@ parts:
       - libgtk-3-bin
       - unity-gtk3-module
       - libappindicator3-1
-      - locales-all
-      - xdg-user-dirs
       - ibus-gtk3
       - libibus-1.0-5
       - libgtk2.0-0
@@ -100,32 +83,3 @@ parts:
       - libopencv-highgui4.2
       - libopencv-imgcodecs4.2
       - libopencv-imgproc4.2
-      - libopencv-videoio4.2
-  dump:
-    source: .
-    plugin: dump
-    after:
-      - desktop-qt5
-      - filegrunt
-    stage-packages:
-      - libc6
-      - libgcc1
-      - libsqlite3-0
-      - libstdc++6
-      - libsqlcipher-dev
-      - libatk-adaptor
-      - libgail-common
-      - libgail-3-0
-      - libgail-3-dev
-      - libgail-dev
-      - qtwayland5
-      - libqscintilla2-qt5-15
-      - libqt5printsupport5
-      - libqt5xml5
-      - libsqlcipher0
-      - libgtk-3-0
-      - libopencv-core4.2
-      - libopencv-highgui4.2
-      - libopencv-imgcodecs4.2
-      - libopencv-imgproc4.2
-      - libopencv-videoio4.2
