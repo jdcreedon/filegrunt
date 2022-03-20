@@ -20,10 +20,16 @@ MainWindow::MainWindow(QWidget* parent)
 
     // Save the connection result
 
-    auto rc = sqlite3_open("../data/offline.db", &db);
-    //auto rc = sqlite3_open(":memory:", &db);
+    //auto rc = sqlite3_open("../data/offline.db", &db);  // File system database
+    auto rc = sqlite3_open(":memory:", &db); // In Memory Database
 
     qDebug() << "DB Autocommit status :" << sqlite3_get_autocommit(db);
+
+    std::filesystem::path p = "../data/offline.db";
+
+
+    qDebug() << "absolute path" << std::filesystem::absolute(p).c_str();
+    qDebug() << "current path" << std::filesystem::current_path().c_str();
 
     // Test if there was an error
     if (rc) {
