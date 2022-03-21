@@ -46,7 +46,6 @@ build-packages:
 parts:
   filegrunt:
     plugin: cmake
-    #cmake-parameters:   ["-DUSE_QT5=True"]
     source: .
   desktop-qt5:
     make-parameters:
