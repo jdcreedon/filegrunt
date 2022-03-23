@@ -68,11 +68,6 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 # Working Prototype
 ![img.png](images/img.png)
 
-![image](https://user-images.githubusercontent.com/6379032/155020061-055f2def-3031-4c95-b59c-eb53857136e0.png)
-
-![image](https://user-images.githubusercontent.com/6379032/155021832-ac8f13e7-128e-48bc-ba37-b3ba9cb712d9.png)
-
-
 # Does it Work
 Yes on Linux, allows you to select a source and destination directory and copy the duplicate files it finds.
 
