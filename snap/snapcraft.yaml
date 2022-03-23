@@ -22,9 +22,21 @@ apps:
       - usr/local/bin/filegrunt
     desktop: usr/local/share/applications/filegrunt.desktop
     environment:
+      TMPDIR: $XDG_RUNTIME_DIR
+      XLOCALEDIR: '$SNAP/usr/share/X11/locale'
+      LOCPATH: '$SNAP/usr/lib/locale'
+      GTK_PATH: $SNAP/lib/gtk-2.0
+      GTK_DATA_PREFIX: $SNAP
+      XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+      XDG_CONFIG_HOME: '$HOME/.config'
+      XKB_CONFIG_ROOT: '$SNAP/usr/share/X11/xkb'
+      XDG_CONFIG_DIRS: '$SNAP/etc/xdg:$XDG_CONFIG_DIRS'
+      XDG_DATA_HOME: '$SNAP/usr/share'
       QT_QPA_PLATFORMTHEME: qt5ct
     plugs:
       - desktop
+      - desktop-legacy
+      - opengl
       - gsettings
       - home
       - unity7
@@ -60,8 +72,14 @@ parts:
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     stage-packages:
+      - libc6
       - libxkbcommon0
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
       - gnome-themes-standard
+      - shared-mime-info
       - libgtk-3-0
       - libqt5gui5
       - libgdk-pixbuf2.0-0
@@ -81,3 +99,4 @@ parts:
     organize:
       usr/lib/*-linux-gnu/blas/*: usr/lib/
       usr/lib/*-linux-gnu/lapack/*: usr/lib/
+      usr/lib/*-linux-gnu/gio/*: usr/lib/

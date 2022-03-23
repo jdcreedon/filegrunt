@@ -256,19 +256,25 @@ void MainWindow::selectSource() {
 }
 
 int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **azColName){
-    int i;
+
+    qDebug() << "Start of callback " << argv[0] ;
+
+    int i=0;
     char *zErrMsg = 0;
     sqlite3* db1 = nullptr;
     std::string sql,sqlValues = "";
     db1 = (sqlite3 *) (const char *) NotUsed;
+    qDebug() << "Start Recursive Directory Search: " << argv[i];
 
     //for(i = 0; i<argc; i++) {
-        for (const auto & file : recursive_directory_iterator(argv[i])) {
-            // qDebug() << file.path().c_str();
-            if (!file.is_directory()){
+    try {
+        for (auto const &file: std::filesystem::recursive_directory_iterator(argv[i])) {
+            qDebug() << file.path().c_str();
+            if (!file.is_directory()) {
 
                 sql = "INSERT INTO file_index (path,name,size,type) VALUES ";
-                sqlValues = sqlValues + "('" + file.path().string() + "','" + file.path().filename().string() + "','" + std::to_string(file.file_size()) + "','" + file.path().extension().string() + "')";
+                sqlValues = sqlValues + "('" + file.path().string() + "','" + file.path().filename().string() + "','" +
+                            std::to_string(file.file_size()) + "','" + file.path().extension().string() + "')";
 
                 sql = sql + sqlValues;
 
@@ -278,9 +284,9 @@ int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **az
 
                 auto rc = sqlite3_exec(db1, sql.c_str(), callback, 0, &zErrMsg);
 
-                sql ="";
+                sql = "";
 
-                if( rc != SQLITE_OK ){
+                if (rc != SQLITE_OK) {
                     // qDebug() << zErrMsg;
                     sqlite3_free(zErrMsg);
                 } else {
@@ -292,7 +298,14 @@ int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **az
         }
         //// qDebug() << azColName[i] << argv[i]  << argv[i];
         //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    //}
+        //}
+    }
+    catch(std::filesystem::filesystem_error &fse)
+    {
+        qDebug() << "Caught fatal exception: " << fse.what();
+
+    }
+
 
     return 0;
 }
@@ -330,13 +343,15 @@ void MainWindow::processSource() {
     //1. Get files in source directories and add them to the file index table
     sql = "SELECT * from source_index";
 
+    qDebug() << "Processing source";
+
     auto rc = sqlite3_exec(db, sql.c_str(), getFilesCallback, MainWindow::db, &zErrMsg);
 
     if( rc != SQLITE_OK ){
-        // qDebug() << zErrMsg;
+        qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        // qDebug() << "File List returned successfully" << rc;
+        qDebug() << "File List returned successfully" << rc;
     }
 
     //2. Remove the files that are not in the file extension types we are comparing
@@ -350,10 +365,10 @@ void MainWindow::processSource() {
     auto rc_duplicates = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
 
     if( rc_duplicates != SQLITE_OK ){
-        // qDebug() << zErrMsg;
+        qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        // qDebug() << "Deleted unneeded files" << rc_duplicates;
+        qDebug() << "Deleted unneeded files" << rc_duplicates;
     }
 
     //3. Check for duplicate names and sizes in the name column and update file index table and mark as potential duplicates
@@ -363,10 +378,10 @@ void MainWindow::processSource() {
     auto rc_duplicate_filename = sqlite3_exec(db, sql.c_str(), getDuplicateFileNamesCallback, MainWindow::db, &zErrMsg);
 
     if( rc_duplicate_filename != SQLITE_OK ){
-        // qDebug() << zErrMsg;
+        qDebug() << zErrMsg;
         sqlite3_free(zErrMsg);
     } else {
-        // qDebug() << "Duplicates identified successfully" << rc_duplicate_filename;
+        qDebug() << "Duplicates identified successfully" << rc_duplicate_filename;
     }
 
 }
