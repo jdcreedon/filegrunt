@@ -74,7 +74,7 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
 
 # Does it Work
-Initial inspection indicates duplicates are being identified correctly as expected and the move duplicates works (kind of).
+Yes on Linux, allows you to select a source and destination directory and copy the duplicate files it finds.
 
 # Compiling
 Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in [BUILDING](BUILDING.md).
