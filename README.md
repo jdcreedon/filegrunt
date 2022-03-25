@@ -16,9 +16,7 @@ Please check our [issues](https://github.com/filegrunt/filegrunt/issues) list to
 # Development
 CLION IDE on Debian Bullseye and Gnome Desktop as Development Environment
 
-QT Framework 6.2.2, OpenCV 4.5.5 , SQLite 3 and C++ 
-
-sqlite Browser to view sqlite database https://github.com/sqlitebrowser/sqlitebrowser 
+QT Framework 6.2.2, OpenCV 4.5.5 , SQLite 3, mxe and C++ 
 
 Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
@@ -66,7 +64,12 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
 ## Windows
 
-Windows binary (coming soon)
+Windows zip file with binary downloadable here filegrunt.zip https://github.com/filegrunt/filegrunt/win/filegrunt.zip
+
+1. Make fielgrunt directory
+2. copy filegrunt zip file to directory
+3. extract zip file
+4. run filegrunt
 
 
 # Working Prototype
@@ -97,3 +100,4 @@ Check out our contribution guidelines here [CONTRIBUTING](./docs/CONTRIBUTING.md
 - First Snap https://medium.com/geekculture/how-i-made-my-first-snap-470d22eb621a
 - Cross environment windows compiler, compile on Linux for Windows https://mxe.cc/
 - Windows installer package tool https://nsis.sourceforge.io/
+- sqlite Browser to view sqlite database https://github.com/sqlitebrowser/sqlitebrowser 
