@@ -13,7 +13,18 @@
   <property name="windowTitle">
    <string>FileGrunt</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPlainTextEdit" name="MWplainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-1</y>
+      <width>801</width>
+      <height>531</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -70,10 +81,10 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionSelect_Source"/>
+   <addaction name="actionSet_Destination"/>
    <addaction name="actionFind_Duplicates"/>
    <addaction name="actionCompare_Images"/>
    <addaction name="actionView_Duplicates"/>
-   <addaction name="actionSet_Destination"/>
    <addaction name="actionMove_Duplicates"/>
    <addaction name="actionExit"/>
   </widget>
@@ -128,7 +139,7 @@
   </action>
   <action name="actionSet_Destination">
    <property name="text">
-    <string>Set Destination</string>
+    <string>Select Destination</string>
    </property>
   </action>
  </widget>

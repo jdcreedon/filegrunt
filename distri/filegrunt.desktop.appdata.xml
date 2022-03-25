@@ -2,20 +2,20 @@
 <component type="desktop">
     <id>filegrunt.desktop</id>
     <metadata_license>CC0-1.0</metadata_license>
-    <project_license>MPL-2.0 and GPL-3.0+</project_license>
-    <name>Duplicate Image Comparison Utility</name>
-    <summary>Duplicate image File Comparison Utility</summary>
+    <project_license>MIT</project_license>
+    <name>FileGrunt</name>
+    <summary>Duplicate image File Checking Utility</summary>
     <description>
         <p> Utility to identify duplicate files/images and allow the user to move the duplicates to a location for archival or deletion.</p>
     </description>
     <content_rating type="oars-1.1" />
     <screenshots>
         <screenshot>
-            <image>https://raw.githubusercontent.com/sqlitebrowser/db4s-screenshots/master/v3.3/kde413_1-create_table.png</image>
-            <caption>DB Browser for SQLite, creating a table</caption>
+            <image>https://github.com/filegrunt/filegrunt/blob/main/images/img.png</image>
+            <caption>Filegrunt</caption>
         </screenshot>
     </screenshots>
-    <url type="homepage">https://filegruntorg/</url>
+    <url type="homepage">https://filegrunt.org/</url>
     <url type="bugtracker">https://github.com/filegrunt/filegrunt/issues</url>
     <releases>
         <release version="0.0.0" date="2022-03-17" />

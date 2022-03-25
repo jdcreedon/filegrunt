@@ -31,6 +31,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui {
     class MainWindow;
     class QAction;
+    class QPlainTextEdit;
 }
 
 namespace cv {
@@ -84,6 +85,7 @@ private slots:
     void viewDuplicateImages();
     void setDestination();
     void moveDuplicateImages();
+    void about();
 
 };
 

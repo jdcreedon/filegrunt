@@ -32,10 +32,11 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}"
 set(CMAKE_PREFIX_PATH  "/mnt/ntfs1/Development/Qt/5.15.2/gcc_64/lib/cmake/")
 #set(QT_VERSION 5)
 
-set(OpenCV_DIR "/mnt/ntfs1/Development/opencv-4.5.5/x64_build/")
-#set(OpenCV_FOUND 1)
+#set(OpenCV_DIR "/mnt/ntfs1/Development/opencv-4.5.5/x64_build/")
+set(OpenCV_DIR "/mnt/ntfs1/Development/opencv-4.5.5/")
+set(OpenCV_FOUND 1)
 
-find_package( OpenCV REQUIRED)
+find_package(OpenCV REQUIRED core imgproc imgcodecs)
 #find_package(PkgConfig REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
@@ -93,7 +94,7 @@ if(NOT WIN32 AND NOT APPLE)
             )
 endif()
 
-#message(STATUS "OpenCV library status:")
-#message(STATUS "    version: ${OpenCV_VERSION}")
-#message(STATUS "    libraries: ${OpenCV_LIBS}")
-#message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "OpenCV library status:")
+message(STATUS "    version: ${OpenCV_VERSION}")
+message(STATUS "    libraries: ${OpenCV_LIBS}")
+message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
