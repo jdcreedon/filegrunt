@@ -18,6 +18,17 @@ MainWindow::MainWindow(QWidget* parent)
 
     createActions();
 
+    ui->MWplainTextEdit->appendPlainText("1. Select the source directory. ");
+    ui->MWplainTextEdit->appendPlainText("2. Select the destination directory where duplicates will be copied to. ");
+    ui->MWplainTextEdit->appendPlainText("3. Press Find Duplicates to find images that have the same name and size.");
+    ui->MWplainTextEdit->appendPlainText("4. Press Compare images to compare the images from step 3 with each other to find duplicate images.");
+    ui->MWplainTextEdit->appendPlainText("5. Press View Suplicates to view the original image file and the associated duplicate image files. ");
+    ui->MWplainTextEdit->appendPlainText("7. Press Move Duplicates to copy the Duplicates to the destination directory.");
+    ui->MWplainTextEdit->appendPlainText("Enjoy!");
+    ui->MWplainTextEdit->appendPlainText("");
+
+    ui->MWplainTextEdit->appendPlainText("Watch for status updates/errors here :-) :");
+
     // Save the connection result
 
     //auto rc = sqlite3_open("../data/offline.db", &db);  // File system database
@@ -200,6 +211,7 @@ void MainWindow::createActions()
     connect(ui->actionView_Duplicates, &QAction::triggered, this, &MainWindow::viewDuplicateImages);
     connect(ui->actionSet_Destination, &QAction::triggered, this, &MainWindow::setDestination);
     connect(ui->actionMove_Duplicates, &QAction::triggered, this, &MainWindow::moveDuplicateImages);
+    connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::about);
 }
 
 void MainWindow::selectSource() {
@@ -212,19 +224,8 @@ void MainWindow::selectSource() {
 
     if (directory.isEmpty())
         return;
-    //ui->lineEdit->setText(directory);
 
-    // Create model
-    // model = new QStringListModel(this);
-
-    // Make data
-
-    //List << directory;
-
-    // Populate our model
-    //model->setStringList(List);
-
-    //ui->listView->setModel(model);
+    ui->MWplainTextEdit->appendPlainText("Input Directory: " + directory);
 
     // Add tp database table
 
@@ -257,7 +258,7 @@ void MainWindow::selectSource() {
 
 int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **azColName){
 
-    qDebug() << "Start of callback " << argv[0] ;
+    //qDebug() << "Start of callback " << argv[0] ;
 
     int i=0;
     char *zErrMsg = 0;
@@ -266,7 +267,6 @@ int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **az
     db1 = (sqlite3 *) (const char *) NotUsed;
     qDebug() << "Start Recursive Directory Search: " << argv[i];
 
-    //for(i = 0; i<argc; i++) {
     try {
         for (auto const &file: std::filesystem::recursive_directory_iterator(argv[i])) {
             qDebug() << file.path().c_str();
@@ -292,20 +292,13 @@ int MainWindow::getFilesCallback(void *NotUsed, int argc, char **argv, char **az
                 } else {
                     //// qDebug() << "File insertion completed successfully" << rc;
                 }
-
             }
-
         }
-        //// qDebug() << azColName[i] << argv[i]  << argv[i];
-        //printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-        //}
     }
     catch(std::filesystem::filesystem_error &fse)
     {
         qDebug() << "Caught fatal exception: " << fse.what();
-
     }
-
 
     return 0;
 }
@@ -344,6 +337,7 @@ void MainWindow::processSource() {
     sql = "SELECT * from source_index";
 
     qDebug() << "Processing source";
+    ui->MWplainTextEdit->appendPlainText("Processing Source...");
 
     auto rc = sqlite3_exec(db, sql.c_str(), getFilesCallback, MainWindow::db, &zErrMsg);
 
@@ -384,6 +378,8 @@ void MainWindow::processSource() {
         qDebug() << "Duplicates identified successfully" << rc_duplicate_filename;
     }
 
+    ui->MWplainTextEdit->appendPlainText("Process Source Completed");
+
 }
 
 int MainWindow::duplicateToArrayCallback(void *NotUsed, int argc, char **argv, char **azColName){
@@ -412,6 +408,8 @@ void MainWindow::compareImages(){
     std::string image_types, sql;
 
     // qDebug() << "Image Comparison Started";
+
+    ui->MWplainTextEdit->appendPlainText("Image Comparison Started");
 
     //3.  Check if the duplicate image files contain the same data as well as having the same name and size
     // add video comparison exclude other file types
@@ -518,6 +516,7 @@ void MainWindow::compareImages(){
     } while (duplicate_list.size() > 0);
 
     // qDebug() << "Image Comparison Complete";
+    ui->MWplainTextEdit->appendPlainText("Image Comparison Completed");
 
 }
 
@@ -525,6 +524,7 @@ void MainWindow::compareImages(){
 void MainWindow::viewDuplicateImages(){
 
     qDebug() << "View Duplicates";
+    ui->MWplainTextEdit->appendPlainText("View Duplicates - yet to be implemented");
 
 }
 
@@ -541,6 +541,8 @@ void MainWindow::setDestination(){
 
     if (directory.isEmpty())
         return;
+
+    ui->MWplainTextEdit->appendPlainText("Destination directory: " + directory);
 
     sql = "INSERT INTO destination_index (directory) VALUES ('"+directory.toStdString()+"') ";
 
@@ -568,6 +570,9 @@ void MainWindow::moveDuplicateImages(){
     // we don't want to overwrite files if we use a common/shared destination directory
 
     list<duplicate_data>::iterator i;
+    std::string dup_count = std::to_string(duplicate_images.size());
+
+    ui->MWplainTextEdit->appendPlainText("Moving " + QString::fromStdString(dup_count) + " duplicate image files");
 
     do {
 
@@ -577,13 +582,44 @@ void MainWindow::moveDuplicateImages(){
         // create the directory structure for the duplicate file using the destination directory as the new root/parent
         // std::filesystem::create_directories("sandbox/1/2/a");
         std::filesystem::path destination_sub_directory;
-        destination_sub_directory = MainWindow::destination_directory.c_str() + first_item.duplicate_path;
-        std::filesystem::create_directories(destination_sub_directory.remove_filename());  // a bit dirty probably a cleaner way to do this :-)
+        destination_sub_directory = MainWindow::destination_directory.string() + first_item.duplicate_path;
+
+        try {
+            std::filesystem::create_directories(
+                    destination_sub_directory.remove_filename());  // a bit dirty probably a cleaner way to do this :-)
+        }
+        catch(std::filesystem::filesystem_error const& ex){
+            ui->MWplainTextEdit->appendPlainText("Error message (Create Directory): " + QString::fromStdString(ex.code().message()));
+        }
+
+        ui->MWplainTextEdit->appendPlainText("Copying from: " + QString::fromStdString(first_item.duplicate_path) + " to: " + QString::fromStdString(destination_sub_directory.string()));
 
         // copy the duplicate file to the destination directory
-        std::filesystem::copy(first_item.duplicate_path, destination_sub_directory.remove_filename(), ec);  // copy files only and not sub-directories
-        qDebug() << "Error Code " << ec.message().c_str();
+        try {
+            std::filesystem::copy(first_item.duplicate_path, destination_sub_directory.remove_filename());  // copy files only and not sub-directories
+        }
+        catch(std::filesystem::filesystem_error const& ex) {
+            std::cout
+                    << "what():  " << ex.what() << '\n'
+                    << "path1(): " << ex.path1() << '\n'
+                    << "path2(): " << ex.path2() << '\n'
+                    << "code().value():    " << ex.code().value() << '\n'
+                    << "code().message():  " << ex.code().message() << '\n'
+                    << "code().category(): " << ex.code().category().name() << '\n';
+            ui->MWplainTextEdit->appendPlainText("Error message: " +QString::fromStdString(ex.code().message()));
+        }
+
+
+        //qDebug() << "Error Code " << ex.message().c_str();
 
     } while (duplicate_images.size() > 0);
 
+    ui->MWplainTextEdit->appendPlainText("Move completed");
+
+}
+
+void MainWindow::about()
+{
+    QMessageBox::about(this, tr("About Application"),
+                       tr("FileGrunt <b>Application</b> find and move duplicate image files "));
 }

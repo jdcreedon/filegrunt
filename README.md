@@ -64,15 +64,22 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
      working on it :-)
 
+## Windows
+
+Windows binary (coming soon)
+
 
 # Working Prototype
-![img.png](images/img.png)
+![img.png](images/filegrunt_main.png)
 
 # Does it Work
 Yes on Linux, allows you to select a source and destination directory and copy the duplicate files it finds.
 
 # Compiling
 Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in [BUILDING](BUILDING.md).
+
+# CI/CD
+https://circleci.com
 
 # Testing
 Plan is to use GitHub Actions
@@ -88,3 +95,5 @@ Check out our contribution guidelines here [CONTRIBUTING](./docs/CONTRIBUTING.md
 - https://www.sqlite.org/
 - Snapcraft Demo https://youtu.be/BEp_l2oUcD8
 - First Snap https://medium.com/geekculture/how-i-made-my-first-snap-470d22eb621a
+- Cross environment windows compiler, compile on Linux for Windows https://mxe.cc/
+- Windows installer package tool https://nsis.sourceforge.io/

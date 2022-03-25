@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Duplicate Image Utility
-Comment=FileGrunt is a duplicate image checker utility
+Name=FileGrunt
+Comment=FileGrunt duplicate image checker utility
 Exec=filegrunt %f
 Icon=filegrunt
 Terminal=false
