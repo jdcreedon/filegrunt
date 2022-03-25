@@ -64,7 +64,7 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
 ## Windows
 
-Windows zip file with binary downloadable here filegrunt.zip https://github.com/filegrunt/filegrunt/win/filegrunt.zip
+Windows zip file with binary downloadable here filegrunt.zip https://github.com/filegrunt/filegrunt/raw/main/win/filegrunt.zip
 
 1. Make fielgrunt directory
 2. copy filegrunt zip file to directory
