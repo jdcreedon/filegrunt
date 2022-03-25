@@ -71,6 +71,9 @@ Windows zip file with binary downloadable here filegrunt.zip https://github.com/
 3. extract zip file
 4. run filegrunt
 
+## Test Image Data
+
+Zip file of test images in directories located here https://github.com/filegrunt/filegrunt/blob/main/tests/data/Testing.zip
 
 # Working Prototype
 ![img.png](images/filegrunt_main.png)
