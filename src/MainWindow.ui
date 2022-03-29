@@ -23,6 +23,9 @@
       <height>531</height>
      </rect>
     </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustIgnored</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

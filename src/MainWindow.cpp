@@ -22,8 +22,8 @@ MainWindow::MainWindow(QWidget* parent)
     ui->MWplainTextEdit->appendPlainText("2. Select the destination directory where duplicates will be copied to. ");
     ui->MWplainTextEdit->appendPlainText("3. Press Find Duplicates to find images that have the same name and size.");
     ui->MWplainTextEdit->appendPlainText("4. Press Compare images to compare the images from step 3 with each other to find duplicate images.");
-    ui->MWplainTextEdit->appendPlainText("5. Press View Suplicates to view the original image file and the associated duplicate image files. ");
-    ui->MWplainTextEdit->appendPlainText("7. Press Move Duplicates to copy the Duplicates to the destination directory.");
+    ui->MWplainTextEdit->appendPlainText("5. Press View Duplicates to view the original image file and the associated duplicate image files. ");
+    ui->MWplainTextEdit->appendPlainText("6. Press Move Duplicates to copy the Duplicates to the destination directory.");
     ui->MWplainTextEdit->appendPlainText("Enjoy!");
     ui->MWplainTextEdit->appendPlainText("");
 
@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget* parent)
     qDebug() << "DB Autocommit status :" << sqlite3_get_autocommit(db);
 
     std::filesystem::path p = "../data/offline.db";
-
 
     qDebug() << "absolute path" << std::filesystem::absolute(p).c_str();
     qDebug() << "current path" << std::filesystem::current_path().c_str();
@@ -562,6 +561,7 @@ void MainWindow::setDestination(){
 void MainWindow::moveDuplicateImages(){
 
     std::error_code ec;
+    std::filesystem::path destination_sub_directory;
     // qDebug() << "Move Duplicates 1";
 
     // Iterate over the array and copy the files to the destination
@@ -579,24 +579,47 @@ void MainWindow::moveDuplicateImages(){
         duplicate_data first_item = duplicate_images.front();
         duplicate_images.pop_front();
 
+        std::filesystem::path p = first_item.duplicate_path;
+
         // create the directory structure for the duplicate file using the destination directory as the new root/parent
         // std::filesystem::create_directories("sandbox/1/2/a");
-        std::filesystem::path destination_sub_directory;
-        destination_sub_directory = MainWindow::destination_directory.string() + first_item.duplicate_path;
+
+        if (p.root_name().c_str() != NULL){  // remove the root from the destination directory
+            //qDebug() << "root name not null" << p.root_name().c_str();
+            ui->MWplainTextEdit->appendPlainText("root name not null " + QString::fromStdString(p.root_name().string()));
+
+            std::string sub_dir = first_item.duplicate_path;
+            //qDebug() << "sub dir path before erase " << sub_dir.c_str();
+
+            sub_dir.erase(0, p.root_name().string().length());
+
+            ui->MWplainTextEdit->appendPlainText("sub dir " + QString::fromStdString(sub_dir));
+
+            //qDebug() << "sub dir path after erase" << sub_dir.c_str();
+            destination_sub_directory = MainWindow::destination_directory.string() + sub_dir;
+
+            ui->MWplainTextEdit->appendPlainText("destination sub directory " + QString::fromStdString(destination_sub_directory.string() ));
+
+        }else{
+            destination_sub_directory = MainWindow::destination_directory.string() + first_item.duplicate_path;
+        }
+
+        std::filesystem::path destination_path = destination_sub_directory;
 
         try {
+            ui->MWplainTextEdit->appendPlainText("Creating Destination Sub Directory : " + QString::fromStdString(destination_path.remove_filename().make_preferred().string()));
             std::filesystem::create_directories(
-                    destination_sub_directory.remove_filename());  // a bit dirty probably a cleaner way to do this :-)
+                    destination_path.remove_filename().make_preferred());  // a bit dirty probably a cleaner way to do this :-)
         }
         catch(std::filesystem::filesystem_error const& ex){
             ui->MWplainTextEdit->appendPlainText("Error message (Create Directory): " + QString::fromStdString(ex.code().message()));
         }
 
-        ui->MWplainTextEdit->appendPlainText("Copying from: " + QString::fromStdString(first_item.duplicate_path) + " to: " + QString::fromStdString(destination_sub_directory.string()));
+        ui->MWplainTextEdit->appendPlainText("Copying from: " + QString::fromStdString(first_item.duplicate_path) + " to: " + QString::fromStdString(destination_path.make_preferred().string()));
 
         // copy the duplicate file to the destination directory
         try {
-            std::filesystem::copy(first_item.duplicate_path, destination_sub_directory.remove_filename());  // copy files only and not sub-directories
+            std::filesystem::copy(first_item.duplicate_path, destination_path.remove_filename().make_preferred());  // copy files only and not sub-directories
         }
         catch(std::filesystem::filesystem_error const& ex) {
             std::cout

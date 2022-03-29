@@ -45,11 +45,11 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 - Figure out how to create a cross platform executable/installation package.
 - Create a Wiki/Issues list and tidy up this file :-)
 
-## Snap packages
+## Snap packages (Beta)
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/filegrunt)
 
-#### Snap Nightlies
+#### Snap Beta Version
 
      snap install filegrunt --edge --devmode
 
@@ -79,7 +79,19 @@ Windows zip file with binary downloadable here filegrunt.zip https://github.com/
 Zip file of test images in directories located here https://github.com/filegrunt/filegrunt/blob/main/tests/data/Testing.zip
 
 # Working Prototype
+
+Installed App on Debian Linux (Icon needs work :-) https://github.com/filegrunt/filegrunt/issues/2)
+
+![img.png](images/installed_app_debian_linux.png)
+
+App running on Debian Linux
+
 ![img.png](images/filegrunt_main.png)
+
+Test Completed on Debian Linux
+
+![img.png](images/filegrunt_run_linux.png)
+
 
 # Does it Work
 Yes on Linux, allows you to select a source and destination directory and copy the duplicate files it finds.
