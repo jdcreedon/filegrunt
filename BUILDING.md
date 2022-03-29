@@ -16,7 +16,7 @@ This will create the default debug build and include the source files in the pro
 
 If the Reload CMake isn't an option do a file invalidate caches and this fixes the issue.
 
-# Windows
+# Windows (Cross Compiling on Linux)
 
 Cross compiling for Windows
 These are instructions to cross compile within a Linux system a Windows binary and installer.
@@ -57,3 +57,6 @@ If you additionally want an NSIS installer:
 
 $ make package
 done.
+
+# Windows
+ - Makefile currently does not contain logic for building on Windows OS.
