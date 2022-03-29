@@ -46,7 +46,7 @@ Now cd into your filegrunt source directory and create a build directory for the
 
 $ mkdir build-win in the filegrunt directory
 $ cd build-win
-$ i686-w64-mingw32.static-cmake ...
+$ i686-w64-mingw32.static-cmake ..
 
 Now compile:
 
