@@ -62,7 +62,10 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 
      working on it :-)
 
-## Windows
+## Windows (Beta)
+
+Known bugs:
+- https://github.com/filegrunt/filegrunt/issues/41
 
 Windows zip file with binary downloadable here filegrunt.zip https://github.com/filegrunt/filegrunt/raw/main/win/filegrunt.zip
 
