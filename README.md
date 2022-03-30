@@ -98,7 +98,7 @@ Yes on Linux, allows you to select a source and destination directory and copy t
 As of March 25th a Windows exe is now available to download. There is a known bug https://github.com/filegrunt/filegrunt/issues/41 that we think is to do with destination path structure.
 
 # Compiling
-Instructions for compiling on Windows, macOS, Linux, and FreeBSD are in [BUILDING](BUILDING.md).
+Instructions for compiling on Windows, macOS and Linux are in [BUILDING](BUILDING.md).
 
 # CI/CD
 https://circleci.com
