@@ -9,6 +9,7 @@
 #include <QMainWindow>
 #include <QtWidgets>
 #include <QFileDialog>
+#include <QFile>
 #include <QStringList>
 #include <QStringListModel>
 #include <QDebug>
@@ -17,6 +18,9 @@
 #include <list>
 #include <opencv2/opencv.hpp>
 #include <unordered_map>
+#include <iomanip>
+#include <sstream>
+#include <iostream>
 
 extern "C"{
 #include <sqlite3.h>
