@@ -5,32 +5,20 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build-for-linux:
-    working_directory: ~/
-    docker: 
-    - image: cimg/base:stable
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD
-    steps:
-      - checkout
-      - run:
-          name: "building linux version"
-          command: cmake --build /mnt/ntfs1/Development/CLionProjects/filegrunt/cmake-build-debug --target filegrunt
-
-#  build-for-windows:
-#    working_directory: ~/build-win
+  
+  build-for-windows:
+    working_directory: ~/build-win
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    #docker:
+    docker:
       - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    #steps:
-      #- checkout
-      #- run:
-          #name: "building windows version"
-          #command: make
+    steps:
+      - checkout
+      - run:
+          name: "building windows version"
+          command: make
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
