@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: "building linux version"
-          command: make
+          command: cmake --build /mnt/ntfs1/Development/CLionProjects/filegrunt/cmake-build-debug --target filegrunt
 
   build-for-windows:
     working_directory: ~/build-win
