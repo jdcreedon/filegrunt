@@ -10,10 +10,16 @@ jobs:
       - run:
           name: "Install dependencies"
           command: |
-            choco install qt-sdk-windows-x64-mingw_sjlj
-            choco install sqlite
-            choco install opencv
-            choco install -y visualstudio2019testagent --package-parameters "--includeRecommended --includeOptional"
+            #choco install qt-sdk-windows-x64-mingw_sjlj
+            #choco install sqlite
+            #choco install opencv
+            choco install visualstudio2022buildtools
+      - run:            
+         command: | 
+          $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+          mkdir build-win
+          cd build-win
+         shell: powershell.exe vcvarsall.bat x86_amd64
 workflows:
   version: 2
   build-and-test:
