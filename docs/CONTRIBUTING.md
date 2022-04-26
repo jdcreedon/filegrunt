@@ -1,6 +1,6 @@
 # Welcome to FileGrunt Contributing Guidelines
 
-Read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
+Read our [Code of Conduct](https://github.com/filegrunt/filegrunt/blob/main/CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
 
 In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
 
@@ -23,4 +23,4 @@ If you spot a problem with the docs, [search if an issue already exists](https:/
 
 #### Solve an issue
 
-Scan through our [existing issues](https://github.com/filegrunt/issues) to find one that interests you. You can narrow down the search using `labels` as filters. As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix.
+Scan through our [existing issues](https://github.com/filegrunt/filegrunt/issues) to find one that interests you. You can narrow down the search using `labels` as filters. As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix.
