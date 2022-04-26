@@ -20,6 +20,7 @@ jobs:
           $(echo cl | Out-Host; $?)
           mkdir build-win
           cd build-win
+          dir
          shell: powershell.exe cl
 workflows:
   version: 2
