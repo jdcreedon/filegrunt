@@ -13,7 +13,7 @@ jobs:
             #choco install qt5-default
             #choco install sqlite
             #choco install opencv
-            choco install microsoft-visual-cpp-build-tools
+            #choco install microsoft-visual-cpp-build-tools
             #choco install visualstudio2022buildtools
       - run:            
          command: | 
