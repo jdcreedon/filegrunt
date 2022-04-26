@@ -10,7 +10,8 @@ jobs:
       - run:
           name: "Install dependencies"
           command: |
-            choco install -y vcbuildtools
+            choco install visualstudio2019buildtools
+            #choco install vcbuildtools
             #choco install sqlite --version 3.38.2 -y
             #choco install opencv --version 4.5.5 -y
             #choco install qt5-default --version 5.15.2.20211228 -y
