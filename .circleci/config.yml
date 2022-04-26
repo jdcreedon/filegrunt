@@ -11,8 +11,8 @@ jobs:
           name: "Install dependencies"
           command: |
             #choco install qt5-default
-            choco install sqlite
-            #choco install opencv
+            #choco install sqlite
+            choco install opencv
             #choco install visualstudio2022buildtools
       - run:            
          command: | 
