@@ -10,10 +10,10 @@ jobs:
       - run:
           name: "Install dependencies"
           command: |
-            #choco install qt5-default
-            #choco install sqlite
+            choco install qt5-default
+            choco install sqlite
             choco install opencv
-            #choco install visualstudio2022buildtools
+            choco install visualstudio2022buildtools
       - run:            
          command: | 
           $(echo cl | Out-Host; $?)
