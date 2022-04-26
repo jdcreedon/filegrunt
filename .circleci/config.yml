@@ -2,19 +2,12 @@ version: 2.1
 orbs: 
   windows: circleci/windows@4.1.1
 jobs:
-  build-for-windows:
+  build:
     executor:
-      name: win/default # executor type
+      name: win/default
     steps:
       - checkout
-      - run:
-          name: "building windows version"
-          command: | 
-            mkdir build
-            cd build
-            cmake.. 
-            make filegrunt
 workflows:
-  build_and_test:
+  build-and-test:
     jobs:
-      - build-for-windows  
+      - build
