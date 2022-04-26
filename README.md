@@ -101,7 +101,8 @@ As of March 25th a Windows exe is now available to download. There is a known bu
 Instructions for compiling on Windows, macOS and Linux are in [BUILDING](BUILDING.md).
 
 # CI/CD
-https://circleci.com
+- SnapCraft is used for CI/CD with pull requests automatically built and ready for release via SnapCraft.
+- Trying out CircleCI https://circleci.com
 
 # Testing
 Plan is to use GitHub Actions
