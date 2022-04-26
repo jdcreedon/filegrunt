@@ -13,13 +13,16 @@ jobs:
             choco install qt-sdk-windows-x64-mingw_sjlj
             #choco install sqlite
             #choco install opencv
-            choco install visualstudio2022buildtools
+            #choco install visualstudio2022buildtools
       - run:            
          command: | 
           $(echo cl | Out-Host; $?)
           mkdir build-win
           cd build-win
-         shell: powershell.exe cl
+          shell: powershell.exe cl
+      - run:
+          command: |
+          shell: powershell cl /EHsc ../main.cpp
 workflows:
   version: 2
   build-and-test:
