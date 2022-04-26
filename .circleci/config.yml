@@ -10,18 +10,18 @@ jobs:
       - run:
           name: "Install dependencies"
           command: |
-            choco install visualstudio2019buildtools
+            #choco install visualstudio2019buildtools
             #choco install vcbuildtools
             #choco install sqlite --version 3.38.2 -y
             #choco install opencv --version 4.5.5 -y
             #choco install qt5-default --version 5.15.2.20211228 -y
       - run:            
          command: | 
-          $(echo cl | Out-Host; $?)
-          mkdir build-win
-          cd build-win
+          #$(echo cl | Out-Host; $?)
+          #mkdir build-win
+          #cd build-win
           dir
-         shell: powershell.exe cl
+         #shell: powershell.exe cl
 workflows:
   version: 2
   build-and-test:
