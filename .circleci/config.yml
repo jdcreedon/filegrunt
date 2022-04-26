@@ -21,7 +21,7 @@ jobs:
           #mkdir build-win
           #cd build-win
           dir
-          "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat" -arch=amd64
+          "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
          #shell: powershell.exe cl
 workflows:
   version: 2
