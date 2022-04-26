@@ -19,10 +19,7 @@ jobs:
           $(echo cl | Out-Host; $?)
           mkdir build-win
           cd build-win
-          shell: powershell.exe cl
-      - run:
-          command: |
-          shell: powershell cl /EHsc ../main.cpp
+         shell: powershell.exe cl
 workflows:
   version: 2
   build-and-test:
