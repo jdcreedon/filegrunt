@@ -1,22 +1,3 @@
 version: 2.1
 orbs: 
   windows: circleci/windows@4.1.1
-jobs:
-  build:
-    executor: win/default
-      
-    steps:
-      - checkout
-      - run:
-          name: "Install dependencies"
-          command: |
-            choco install -y wget
-            choco install -y terragrunt --version 0.18.6
-            choco install -y terraform --allow-downgrade --version 0.11.14
-            choco install -y python
-            choco install -y visualstudio2019testagent --package-parameters "--includeRecommended --includeOptional"
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build
