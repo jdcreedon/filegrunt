@@ -46,7 +46,7 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
 - Figure out how to create a cross platform executable/installation package.
 - Create a Wiki/Issues list and tidy up this file :-)
 
-## Snap packages (Beta)
+## Snap Stable
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/filegrunt)
 
@@ -59,14 +59,8 @@ Aiming for a cross platform utility that will work on Linux, Mac & Windows.
     sudo snap remove filegrunt
 
 
-#### Snap Stable
-
-     working on it :-)
-
 ## Windows (Beta)
 
-Known bugs:
-- https://github.com/filegrunt/filegrunt/issues/41
 
 Windows zip file with binary downloadable here filegrunt.zip https://github.com/filegrunt/filegrunt/raw/main/win/filegrunt.zip
 
@@ -95,15 +89,15 @@ Test Completed on Debian Linux
 
 
 # Does it Work
-Yes on Linux, allows you to select a source and destination directory and copy the duplicate files it finds.
-As of March 25th a Windows exe is now available to download. There is a known bug https://github.com/filegrunt/filegrunt/issues/41 that we think is to do with destination path structure.
+Yes on Linux, and Windows. App allows you to select a source and destination directory and copy the duplicate files it finds.
+Windows app available to download from here https://github.com/filegrunt/filegrunt/blob/main/tests/data/Testing.zip 
 
 # Compiling
 Instructions for compiling on Windows, macOS and Linux are in [BUILDING](BUILDING.md).
 
 # CI/CD
 - SnapCraft is used for CI/CD with pull requests automatically built and ready for release via SnapCraft.
-- Trying out CircleCI https://circleci.com
+- Trying out CircleCI https://circleci.com for Windows build
 
 # Testing
 Plan is to use GitHub Actions
