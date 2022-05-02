@@ -453,9 +453,7 @@ void MainWindow::compareImages(){
             // qDebug() << i->path.c_str() << "Could not open or find the image";
         }
 
-        // sudo apt install libgtk2.0-dev and pkg-config
 
-        //cv::imshow("MainWindow", image1); //removed as causing error need to debug/fix
 
         for (i=duplicate_list.begin();i!=duplicate_list.end();i++){
 
@@ -479,6 +477,8 @@ void MainWindow::compareImages(){
 
                 if (matrix_zeros == 0) {
                     // qDebug() << i->path.c_str() << "images match";
+
+                    //cv::imshow("MainWindow"+i->name, image1);
 
                     sql = "INSERT INTO duplicate_file_list (path, duplicate_path) VALUES ('"+first_item.path+"', '"+i->path+"') ";
 
@@ -523,7 +523,24 @@ void MainWindow::compareImages(){
 void MainWindow::viewDuplicateImages(){
 
     qDebug() << "View Duplicates";
-    ui->MWplainTextEdit->appendPlainText("View Duplicates - yet to be implemented");
+    //ui->MWplainTextEdit->appendPlainText("View Duplicates - yet to be implemented");
+
+
+    list<duplicate_data>::iterator it;
+    int dup_count = 0;
+
+    //ui->MWplainTextEdit->appendPlainText("Moving " + QString::fromStdString(dup_count) + " duplicate image files");
+
+
+
+    for (it = duplicate_images.begin(); it != duplicate_images.end(); ++it) {
+        dup_count++;
+        cv::Mat image1 = cv::imread(it->duplicate_path, cv::IMREAD_GRAYSCALE);
+        //std::cout<<(*it)->name;
+        cv::imshow("MainWindow"+it->name+"dup count"+std::to_string(dup_count), image1);
+        ui->MWplainTextEdit->appendPlainText("Duplicate Image" + QString::fromStdString(it->duplicate_path));
+    }
+
 
 }
 
@@ -706,11 +723,6 @@ void MainWindow::moveDuplicateImages(){
             ui->MWplainTextEdit->appendPlainText("Destination Directory Doesn't Exist: " + QString::fromStdString(destination_sub_directory.make_preferred().string()));
         }
 
-
-
-
-
-        //qDebug() << "Error Code " << ex.message().c_str();
 
     } while (duplicate_images.size() > 0);
 

@@ -36,7 +36,7 @@ set(CMAKE_PREFIX_PATH  "/mnt/ntfs1/Development/Qt/5.15.2/gcc_64/lib/cmake/")
 set(OpenCV_DIR "/mnt/ntfs1/Development/opencv-4.5.5/")
 set(OpenCV_FOUND 1)
 
-find_package(OpenCV REQUIRED core imgproc imgcodecs)
+find_package(OpenCV REQUIRED core imgproc imgcodecs videoio highgui)
 #find_package(PkgConfig REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
