@@ -4,7 +4,8 @@ orbs:
 jobs:
   build:
     executor:
-      name: windows/default
+      name: win/server-2022
+      #name: windows/default
     steps:
       - checkout
       - run:
