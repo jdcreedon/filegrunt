@@ -16,7 +16,7 @@ jobs:
             #choco install opencv --version 4.5.5 -y
             #choco install qt5-default --version 5.15.2.20211228 -y
       - run:
-         name: "Build Application"            
+         name: "Build Application 1"            
          command: | 
           ssh -v git@github.com
           cmd.exe "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
