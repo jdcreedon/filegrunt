@@ -22,6 +22,7 @@ jobs:
           #cd "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\"
           #"c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+          dir
           "cl.exe"
 workflows:
   version: 2
