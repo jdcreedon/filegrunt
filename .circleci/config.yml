@@ -23,8 +23,8 @@ jobs:
           #"c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
           dir
-          "cl.exe /EHsc \src\MainWindow.cpp"
-          dir "\src"
+          "cl.exe /EHsc src\MainWindow.cpp"
+          dir "src"
 workflows:
   version: 2
   build-and-test:
