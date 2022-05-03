@@ -22,8 +22,8 @@ jobs:
           #cd build-win
           dir
           dir c:\
-          #cd "c:\%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\Common7\Tools\"
-          cd "c:\ProgramFiles(x86)\"
+          #cd "c:\%Program Files(x86)%\Microsoft Visual Studio\2019\Community\Common7\Tools\"
+          cd "c:\Program Files(x86)\"
           #"%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat" cl
          #shell: powershell.exe cl
 workflows:
