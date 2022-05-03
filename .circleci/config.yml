@@ -21,7 +21,7 @@ jobs:
           #dir "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\"
           #cd "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\"
           #"c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
-          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+          C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat
           mkdir "C:\Users\circleci\project\build-win"
           dir
           "cl.exe /W4 /EHsc C:\Users\circleci\project\src\main.cpp C:\Users\circleci\project\src\MainWindow.cpp C:\Users\circleci\project\src\sqlite3.c /link /out:C:\Users\circleci\project\build-win\filegrunt.exe"
