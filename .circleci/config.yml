@@ -23,7 +23,7 @@ jobs:
           dir
           dir c:\
           #cd "c:\%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\Common7\Tools\"
-          cd "c:\%ProgramFiles(x86)%\"
+          cd "c:\ProgramFiles(x86)\"
           #"%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat" cl
          #shell: powershell.exe cl
 workflows:
