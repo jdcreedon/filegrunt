@@ -25,6 +25,7 @@ jobs:
           dir
           "cl.exe /EHsc C:\Users\circleci\project\src\main.cpp"
           dir "C:\Users\circleci\project\src"
+          dir
 workflows:
   version: 2
   build-and-test:
