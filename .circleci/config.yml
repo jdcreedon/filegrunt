@@ -28,6 +28,7 @@ jobs:
           cl.exe /W4 /EHsc src\main.cpp src\MainWindow.cpp src\sqlite3.c /link /out:C:\Users\circleci\project\buildwin\filegrunt.exe
           dir "C:\Users\circleci\project\build-win"
           dir
+          shell: cmd.exe
 workflows:
   version: 2
   build-and-test:
