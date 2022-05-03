@@ -18,7 +18,7 @@ jobs:
       - run:
          name: "Build Application 1"            
          command: | 
-          ssh -v git@github.com
+          #ssh -v git@github.com
           cmd.exe "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
           mkdir "C:\Users\circleci\project\build-win"
           dir
