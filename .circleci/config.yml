@@ -23,7 +23,7 @@ jobs:
           #"c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat"
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
           dir
-          "cl.exe /EHsc C:\Users\circleci\project\src\main.cpp"
+          "cl.exe /EHsc C:\Users\circleci\project\src\main.cpp C:\Users\circleci\project\src\MainWindow.cpp C:\Users\circleci\project\src\sqlite3.c"
           dir "C:\Users\circleci\project\src"
           dir
 workflows:
