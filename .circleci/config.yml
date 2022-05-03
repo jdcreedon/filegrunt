@@ -17,17 +17,9 @@ jobs:
             #choco install qt5-default --version 5.15.2.20211228 -y
       - run:            
          command: | 
-          #$(echo cl | Out-Host; $?)
-          #mkdir build-win
-          #cd build-win
-          #dir
-          #dir c:\
           dir "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\"
           cd "c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\"
-          #dir "c:\Program Files (x86)\Microsoft Visual Studio\"
-          #cd "c:\Program Files (x86)\Microsoft Visual Studio\"
-          #"%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat" cl
-         #shell: powershell.exe cl
+          VsDevCmd.bat
 workflows:
   version: 2
   build-and-test:
