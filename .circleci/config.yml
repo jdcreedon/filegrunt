@@ -18,15 +18,13 @@ jobs:
       - run:
          name: "Build Application 1"            
          command: | 
-          #ssh -v git@github.com
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
-          mkdir "C:\Users\circleci\project\build-win"
-          dir
-          #"cl.exe /W4 /EHsc C:\Users\circleci\project\src\main.cpp C:\Users\circleci\project\src\MainWindow.cpp C:\Users\circleci\project\src\sqlite3.c /link /out:C:\Users\circleci\project\build-win\filegrunt.exe"
-          cl.exe /W4 /EHsc src\main.cpp src\MainWindow.cpp src\sqlite3.c /link /out:C:\Users\circleci\project\buildwin\filegrunt.exe
-          dir "C:\Users\circleci\project\build-win"
-          dir
          shell: cmd.exe
+      - run:
+         name: "Build Application 2"            
+         command: | 
+          cl.exe /W4 /EHsc src\main.cpp src\MainWindow.cpp src\sqlite3.c /link /out:C:\Users\circleci\project\buildwin\filegrunt.exe
+         shell: cmd.exe         
 workflows:
   version: 2
   build-and-test:
