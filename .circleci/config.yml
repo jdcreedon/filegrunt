@@ -14,7 +14,7 @@ jobs:
             #choco install vcbuildtools
             #choco install sqlite --version 3.38.2 -y
             #choco install opencv --version 4.5.5 -y
-            choco install qt5-default --version 5.15.2.20211228 -y
+            #choco install qt5-default --version 5.15.2.20211228 -y
       - run:
          name: "Build Application"            
          command: | 
@@ -22,7 +22,7 @@ jobs:
           mkdir "C:\Users\circleci\project\build-win"
           dir
           #"cl.exe /W4 /EHsc C:\Users\circleci\project\src\main.cpp C:\Users\circleci\project\src\MainWindow.cpp C:\Users\circleci\project\src\sqlite3.c /link /out:C:\Users\circleci\project\build-win\filegrunt.exe"
-          "cl.exe /W4 /EHsc src\main.cpp src\MainWindow.cpp src\sqlite3.c /link /out:C:\Users\circleci\project\buildwin\filegrunt.exe"
+          cl.exe /W4 /EHsc src\main.cpp src\MainWindow.cpp src\sqlite3.c /link /out:C:\Users\circleci\project\buildwin\filegrunt.exe
           dir "C:\Users\circleci\project\build-win"
           dir
 workflows:
