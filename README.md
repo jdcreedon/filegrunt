@@ -75,7 +75,7 @@ Zip file of test images in directories located here https://github.com/filegrunt
 
 # Working Prototype
 
-Installed App on Debian Linux (Icon needs work :-) https://github.com/filegrunt/filegrunt/issues/2)
+Installed App on Debian Linux thanks to https://github.com/NoahAldahan for the spiffy FileGrunt icon
 
 ![img.png](images/installed_app_debian_linux.png)
 
