@@ -1,7 +1,7 @@
 # FileGrunt v0.0.0
 [![GitHub issues](https://img.shields.io/github/issues/filegrunt/filegrunt)](https://github.com/filegrunt/filegrunt/issues)
-[![GitHub](https://img.shields.io/github/license/filegrunt/filegrunt)](https://github.com/filegrunt/filegrunt/blob/main/LICENSE)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/filegrunt/filegrunt)](https://github.com/filegrunt/filegrunt/pulls)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/n-ce/ytify/blob/main/LICENSE)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/n-ce/ytify)](https://github.com/n-ce/ytify/pulls)
 
 <p align="center">
 <img width="240" height="240" src="https://user-images.githubusercontent.com/6379032/155383375-fbe860ee-1910-4f7a-992e-4572451cc676.png">
