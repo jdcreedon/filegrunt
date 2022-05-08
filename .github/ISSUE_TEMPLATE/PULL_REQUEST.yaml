@@ -1,0 +1,40 @@
+name: Pull request
+description: Suggest an idea for improving Filegrunt
+title: "[PULL REQUEST] <title>"
+labels: [Pull Request]
+body:
+  - type: textarea
+    attributes:
+      label: What does this Pull Request change ?
+      description: Please concisely describe the changes you have made.
+      placeholder: |
+        I have fixed a bug concerning ...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Does this Pull Request fix a certain issue ?
+      description: Please search to see if an issue already exists for the changes you have made and link it.
+      placeholder: |
+        Issue #01 ...
+    validations:
+      required: false
+
+  - type: checkboxes
+    attributes:
+      label:  I have reviewed my submission thoroughly
+      options:
+        - label: I have reviewed my submission thoroughly
+          required: true
+  - type: checkboxes
+    attributes:
+      label: I have tested my code (if submission is related to coding)
+      options:
+        - label: I have tested my code (if submission is related to coding)
+          required: true
+  - type: checkboxes
+    attributes:
+      label:  I have read the code of conduct
+      options:
+        - label: I have read the code of conduct
+          required: true
