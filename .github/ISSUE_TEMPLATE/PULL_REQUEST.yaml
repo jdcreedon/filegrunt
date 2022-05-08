@@ -24,17 +24,17 @@ body:
     attributes:
       label:  I have reviewed my submission thoroughly
       options:
-        - label: I have reviewed my submission thoroughly
+        - label: I have reviewed my submission thoroughly.
           required: true
   - type: checkboxes
     attributes:
       label: I have tested my code (if submission is related to coding)
       options:
-        - label: I have tested my code (if submission is related to coding)
+        - label: I have tested my code (if submission is related to coding).
           required: true
   - type: checkboxes
     attributes:
       label:  I have read the code of conduct
       options:
-        - label: I have read the code of conduct
+        - label: I have read the code of conduct.
           required: true
