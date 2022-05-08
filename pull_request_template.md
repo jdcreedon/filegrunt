@@ -1,6 +1,7 @@
 ## Description
 
 Please concisely describe the changes you have made to the project.
+Please don't forget to say if it was a code contribution or not.
 
 ## Issue link
 
